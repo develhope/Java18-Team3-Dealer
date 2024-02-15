@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table
-public abstract class Veicoli {
+public abstract class Veicolo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,10 +34,11 @@ public abstract class Veicoli {
     @Column(nullable = false)
     private Boolean nuovoOUsato;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private StatoVeicolo statoVeicolo;
 
-    public Veicoli(Long id, String marca, String modello, int cilindrata, int potenza, String tipoCambio, int annoImmatricolazione,
-                   String alimentazione, Double prezzo, Double sconto, List<String> accessori, Boolean nuovoOUsato, StatoVeicolo statoVeicolo) {
+    public Veicolo(Long id, String marca, String modello, int cilindrata, int potenza, String tipoCambio, int annoImmatricolazione,
+                  String alimentazione, Double prezzo, Double sconto, List<String> accessori, Boolean nuovoOUsato, StatoVeicolo statoVeicolo) {
         this.id = id;
         this.marca = marca;
         this.modello = modello;
@@ -53,7 +54,7 @@ public abstract class Veicoli {
         this.statoVeicolo = statoVeicolo;
     }
 
-    public Veicoli() {}
+    public Veicolo() {}
 
     public Long getId() {
         return id;
