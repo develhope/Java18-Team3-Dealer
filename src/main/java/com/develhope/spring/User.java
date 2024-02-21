@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table
-public class Buyer {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -18,17 +18,21 @@ public class Buyer {
     private String email;
     @Column(nullable = false, length = 10)
     private String password;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private TypeUser typeUser;
 
-    public Buyer(Long id, String firstName, String lastName, String telephoneNumber, String email, String password) {
+    public User(Long id, String firstName, String lastName, String telephoneNumber, String email, String password, TypeUser typeUser) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.password = password;
+        this.typeUser = typeUser;
     }
 
-    public Buyer() {
+    public User() {
     }
 
     public Long getId() {
@@ -79,15 +83,24 @@ public class Buyer {
         this.password = password;
     }
 
+    public TypeUser getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(TypeUser typeUser) {
+        this.typeUser = typeUser;
+    }
+
     @Override
     public String toString() {
-        return "Buyer{" +
+        return "User{" +
                 "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", typeUser=" + typeUser +
                 '}';
     }
 }
