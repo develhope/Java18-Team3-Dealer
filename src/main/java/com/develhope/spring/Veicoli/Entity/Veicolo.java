@@ -1,6 +1,5 @@
-package com.develhope.spring.Entity;
+package com.develhope.spring.Veicoli.Entity;
 
-import com.develhope.spring.StatoVeicolo;
 import jakarta.persistence.*;
 
 import java.util.List;

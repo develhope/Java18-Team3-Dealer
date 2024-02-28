@@ -1,12 +1,11 @@
-package com.develhope.spring.Entity;
-
-import com.develhope.spring.StatoVeicolo;
+package com.develhope.spring.Veicoli.Entity;
 
 import java.util.List;
 
-public class Scooter extends Veicolo{
-    public Scooter (Long id, String marca, String modello, int cilindrata, int potenza, String tipoCambio, int annoImmatricolazione,
+public class Moto extends Veicolo {
+    public Moto (Long id, String marca, String modello, int cilindrata, int potenza, String tipoCambio, int annoImmatricolazione,
                  String alimentazione, Double prezzo, Double sconto, List<String> accessori, Boolean nuovoOUsato, StatoVeicolo statoVeicolo) {
         super(id,marca,modello,cilindrata,potenza,tipoCambio,annoImmatricolazione,alimentazione,prezzo,sconto,accessori,nuovoOUsato,statoVeicolo);
     }
+
 }
