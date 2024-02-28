@@ -1,4 +1,4 @@
-package com.develhope.spring;
+package User.UserEntity;
 public enum TypeUser {
     ADMIN,
     BUYER,
