@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table
-public class Veicolo {
+public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -42,7 +42,7 @@ public class Veicolo {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
-    public Veicolo(Long id, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
+    public Vehicle(Long id, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -60,7 +60,7 @@ public class Veicolo {
         this.vehicleType = vehicleType;
     }
 
-    public Veicolo() {
+    public Vehicle() {
     }
 
     public Long getId() {
