@@ -1,5 +1,6 @@
 package com.develhope.spring.User.UserEntity;
 
+import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
 @Entity
@@ -21,6 +22,8 @@ public class User {
     @Column
     @Enumerated(EnumType.STRING)
     private TypeUser typeUser;
+    //@ManyToOne
+    //private Vehicle vehicle;
 
     public User(Long id, String firstName, String lastName, String telephoneNumber, String email, String password, TypeUser typeUser) {
         this.id = id;

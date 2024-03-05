@@ -1,9 +1,13 @@
 package com.develhope.spring.Rental.Entity;
 
 
+import com.develhope.spring.User.UserEntity.TypeUser;
+import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
+
 @Table
 @Entity
 public class Rental {
@@ -20,8 +24,8 @@ public class Rental {
     private double totalCost;
     @Column(nullable = false)
     private boolean paidFlag;
-    //@OneToMany
-    //private Veicolo veicolo;
+   // @OneToMany(fetch = FetchType.LAZY,mappedBy = "rental")
+    //private List<Vehicle> vehicle;
     @Enumerated(EnumType.STRING)
     private RentalStatus rentalStatus;
 
@@ -83,6 +87,8 @@ public class Rental {
         this.rentalStatus = rentalStatus;
     }
 
+
+
     public Rental(Long id, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus) {
         this.id = id;
         this.startDate = startDate;
@@ -90,7 +96,6 @@ public class Rental {
         this.dailyCost = dailyCost;
         this.totalCost = totalCost;
         this.paidFlag = paidFlag;
-        //this.veicolo = veicolo;
         this.rentalStatus = rentalStatus;
 
     }
