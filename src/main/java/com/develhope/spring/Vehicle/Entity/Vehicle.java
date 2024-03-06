@@ -1,12 +1,9 @@
 package com.develhope.spring.Vehicle.Entity;
 
 import com.develhope.spring.Rental.Entity.Rental;
-import com.develhope.spring.User.UserEntity.User;
 import jakarta.persistence.*;
-
 import java.time.Year;
 import java.util.List;
-
 @Entity
 @Table
 public class Vehicle {
