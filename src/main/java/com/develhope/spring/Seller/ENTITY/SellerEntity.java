@@ -1,42 +1,46 @@
-package com.develhope.spring.Seller.ENTITY;
+package com.develhope.spring.User.UserEntity;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table
-public class SellerEntity {
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long sellerId;
+    private Long id;
     @Column(nullable = false, name = "Nome")
     private String firstName;
     @Column(nullable = false, name = "Cognome")
     private String lastName;
-    @Column(nullable = false, unique = true)
-    private int phoneNumber;
-    @Column(unique = true, nullable = false, name = "Indirizzo email")
+    @Column(nullable = false, name = "Numero di telefono")
+    private String telephoneNumber;
+    @Column(unique = true, name = "Indirizzo email")
     private String email;
     @Column(nullable = false, length = 10)
     private String password;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private TypeUser typeUser;
 
-    public SellerEntity(Long admin_id, String firstName, String lastName, int phoneNumber, String email, String password) {
-        this.sellerId = admin_id;
+    public User(Long id, String firstName, String lastName, String telephoneNumber, String email, String password, TypeUser typeUser) {
+        this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
+        this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.password = password;
+        this.typeUser = typeUser;
     }
 
-    public SellerEntity() {
+    public User() {
     }
 
-    public Long getSellerId() {
-        return sellerId;
+    public Long getId() {
+        return id;
     }
 
-    public void setSellerId(Long sellerId) {
-        this.sellerId = sellerId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -55,12 +59,12 @@ public class SellerEntity {
         this.lastName = lastName;
     }
 
-    public int getPhoneNumber() {
-        return phoneNumber;
+    public String getTelephoneNumber() {
+        return telephoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 
     public String getEmail() {
@@ -79,15 +83,24 @@ public class SellerEntity {
         this.password = password;
     }
 
+    public TypeUser getTypeUser() {
+        return typeUser;
+    }
+
+    public void setTypeUser(TypeUser typeUser) {
+        this.typeUser = typeUser;
+    }
+
     @Override
     public String toString() {
-        return "SellerEntity{" +
-                "sellerId=" + sellerId +
+        return "User{" +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", phoneNumber=" + phoneNumber +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", typeUser=" + typeUser +
                 '}';
     }
 }
