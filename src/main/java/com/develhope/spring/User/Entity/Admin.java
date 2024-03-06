@@ -1,24 +1,22 @@
 package com.develhope.spring.User.Entity;
-
 import jakarta.persistence.*;
-
 @Table
 @Entity
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long admin_id;
     @Column(nullable = false, name = "Nome")
     private String firstName;
     @Column(nullable = false, name = "Cognome")
     private String lastName;
-    @Column(unique = true, name = "Indirizzo email")
+    @Column(unique = true, name = "Indirizzo email", nullable = false)
     private String email;
     @Column(nullable = false, length = 10)
     private String password;
 
-    public Admin(Long id, String firstName, String lastName, String email, String password) {
-        this.id = id;
+    public Admin(Long admin_id, String firstName, String lastName, String email, String password) {
+        this.admin_id = admin_id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -28,12 +26,13 @@ public class Admin {
     public Admin() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getAdmin_id() {
+        return admin_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long admin_id) {
+
+        this.admin_id = admin_id;
     }
 
     public String getFirstName() {
@@ -71,7 +70,7 @@ public class Admin {
     @Override
     public String toString() {
         return "Admin{" +
-                "id=" + id +
+                "admin_id=" + admin_id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
