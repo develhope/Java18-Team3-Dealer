@@ -1,6 +1,6 @@
-package com.develhope.spring.User.Repository;
+package com.develhope.spring.Admin.Repository;
 
-import com.develhope.spring.User.Entity.Admin;
+import com.develhope.spring.Admin.Entity.Admin;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

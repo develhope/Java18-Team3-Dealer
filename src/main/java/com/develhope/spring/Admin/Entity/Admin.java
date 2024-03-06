@@ -1,4 +1,4 @@
-package com.develhope.spring.User.Entity;
+package com.develhope.spring.Admin.Entity;
 import jakarta.persistence.*;
 @Table
 @Entity
