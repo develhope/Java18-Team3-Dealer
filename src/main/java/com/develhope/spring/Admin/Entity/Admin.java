@@ -1,49 +1,38 @@
-package com.develhope.spring.User.UserEntity;
-
-import com.develhope.spring.Vehicle.Entity.Vehicle;
+package com.develhope.spring.Admin.Entity;
 import jakarta.persistence.*;
-
-@Entity
 @Table
-public class User {
+@Entity
+public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long admin_id;
     @Column(nullable = false, name = "Nome")
     private String firstName;
     @Column(nullable = false, name = "Cognome")
     private String lastName;
-    @Column(nullable = false, name = "Numero di telefono")
-    private String telephoneNumber;
-    @Column(unique = true, name = "Indirizzo email")
+    @Column(unique = true, name = "Indirizzo email", nullable = false)
     private String email;
     @Column(nullable = false, length = 10)
     private String password;
-    @Column
-    @Enumerated(EnumType.STRING)
-    private TypeUser typeUser;
-    //@ManyToOne
-    //private Vehicle vehicle;
 
-    public User(Long id, String firstName, String lastName, String telephoneNumber, String email, String password, TypeUser typeUser) {
-        this.id = id;
+    public Admin(Long admin_id, String firstName, String lastName, String email, String password) {
+        this.admin_id = admin_id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.password = password;
-        this.typeUser = typeUser;
     }
 
-    public User() {
+    public Admin() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getAdmin_id() {
+        return admin_id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long admin_id) {
+
+        this.admin_id = admin_id;
     }
 
     public String getFirstName() {
@@ -62,14 +51,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -86,24 +67,14 @@ public class User {
         this.password = password;
     }
 
-    public TypeUser getTypeUser() {
-        return typeUser;
-    }
-
-    public void setTypeUser(TypeUser typeUser) {
-        this.typeUser = typeUser;
-    }
-
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
+        return "Admin{" +
+                "admin_id=" + admin_id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
-                ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", typeUser=" + typeUser +
                 '}';
     }
 }
