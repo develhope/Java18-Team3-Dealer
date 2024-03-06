@@ -1,13 +1,14 @@
-package com.develhope.spring.Vehicle.Controller;
+package com.develhope.spring.Seller.CONTROLLER;
 
-import com.develhope.spring.Vehicle.Service.VehicleService;
+import com.develhope.spring.Seller.SERVICE.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping
-public class VehicleController {
+@RequestMapping("/api/")
+public class SellerController {
     @Autowired
-    VehicleService vehicleService;
+    SellerService sellerService;
+
 }
