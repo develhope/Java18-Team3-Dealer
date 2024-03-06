@@ -1,7 +1,5 @@
 package com.develhope.spring.Rental.Entity;
 
-
-import com.develhope.spring.User.UserEntity.TypeUser;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
@@ -24,8 +22,6 @@ public class Rental {
     private double totalCost;
     @Column(nullable = false)
     private boolean paidFlag;
-   // @OneToMany(fetch = FetchType.LAZY,mappedBy = "rental")
-    //private List<Vehicle> vehicle;
     @Enumerated(EnumType.STRING)
     private RentalStatus rentalStatus;
 
