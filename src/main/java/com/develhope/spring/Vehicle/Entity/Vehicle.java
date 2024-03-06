@@ -10,7 +10,7 @@ import java.util.List;
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long vehicleId;
     @Column(nullable = false)
     private String brand;
     @Column(nullable = false)
@@ -42,8 +42,8 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
-    public Vehicle(Long id, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
-        this.id = id;
+    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
+        this.vehicleId = vehicleId;
         this.brand = brand;
         this.model = model;
         this.displacement = displacement;
@@ -63,12 +63,12 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Long getId() {
-        return id;
+    public Long getVehicleIdId() {
+        return vehicleId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setVehicleIdId(Long id) {
+        this.vehicleId = id;
     }
 
     public String getBrand() {
@@ -186,7 +186,7 @@ public class Vehicle {
     @Override
     public String toString() {
         return "Veicolo{" +
-                "id=" + id +
+                "id=" + vehicleId +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", displacement=" + displacement +
