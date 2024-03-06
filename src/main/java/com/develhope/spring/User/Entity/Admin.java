@@ -1,4 +1,4 @@
-package com.develhope.spring.User.UserEntity;
+package com.develhope.spring.User.Entity;
 
 import jakarta.persistence.*;
 

@@ -1,4 +1,4 @@
-package com.develhope.spring.User.UserService;
+package com.develhope.spring.User.Service;
 
 import org.springframework.stereotype.Service;
 
