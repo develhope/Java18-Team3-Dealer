@@ -1,7 +1,6 @@
 package com.develhope.spring.Buyer.Entity;
 
 import jakarta.persistence.*;
-
 @Table
 @Entity
 public class Buyer {
