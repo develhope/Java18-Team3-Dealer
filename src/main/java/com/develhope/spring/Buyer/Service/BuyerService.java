@@ -2,7 +2,7 @@ package com.develhope.spring.Buyer.Service;
 
 import com.develhope.spring.Buyer.Entity.Buyer;
 import com.develhope.spring.Buyer.Repository.BuyerRepository;
-import com.develhope.spring.Order.Entity.Order;
+import com.develhope.spring.Order.Entity.Orders;
 import com.develhope.spring.Order.Repository.OrderRepository;
 import com.develhope.spring.Rental.Entity.Rental;
 import com.develhope.spring.Rental.RentalRepository.RentalRepository;
@@ -41,10 +41,10 @@ public class BuyerService {
     }
 
     //metodo per vedere i propri ordini
-    public List<Order> getOrders(Long buyer_id, Long orderId) {
+    public List<Orders> getOrders(Long buyer_id, Long orderId) {
         Optional<Buyer> user = buyerRepository.findById(buyer_id);
         if (user.isPresent()) {
-            Optional<Order> orderList = orderRepository.findById(orderId);
+            Optional<Orders> orderList = orderRepository.findById(orderId);
         }
         return null;
     }
