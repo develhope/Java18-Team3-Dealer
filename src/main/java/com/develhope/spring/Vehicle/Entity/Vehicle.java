@@ -1,7 +1,6 @@
 package com.develhope.spring.Vehicle.Entity;
 
 import com.develhope.spring.Rental.Entity.Rental;
-
 import jakarta.persistence.*;
 
 import java.time.Year;
