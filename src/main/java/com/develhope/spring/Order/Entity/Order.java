@@ -13,6 +13,7 @@ public class Order {
     @Column(nullable = false)
     private Boolean isPaid;
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
 //@ManyToOne
 //private Vehicle vehicle;
