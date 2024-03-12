@@ -42,10 +42,6 @@ public class Vehicle {
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
-    //@OneToMany(fetch = FetchType.LAZY,mappedBy = "vehicle")
-    //private List<Rental> rental;
-    //@ManyToOne
-    //private User admin;
 
     public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
         this.vehicleId = vehicleId;
