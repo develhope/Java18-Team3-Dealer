@@ -11,7 +11,7 @@ import java.util.List;
 public class Rental {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long rentalId;
     @Column
     private LocalDate startDate;
     @Column
@@ -26,12 +26,12 @@ public class Rental {
     private RentalStatus rentalStatus;
 
 
-    public Long getId() {
-        return id;
+    public Long getRentalId() {
+        return getRentalId();
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.rentalId = id;
     }
 
     public LocalDate getStartDate() {
@@ -85,8 +85,8 @@ public class Rental {
 
 
 
-    public Rental(Long id, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus) {
-        this.id = id;
+    public Rental(Long rentalId, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus) {
+        this.rentalId = rentalId;
         this.startDate = startDate;
         this.endDate = endDate;
         this.dailyCost = dailyCost;
@@ -102,7 +102,7 @@ public class Rental {
     @Override
     public String toString() {
         return "Rental{" +
-                "id=" + id +
+                "rentalId=" + rentalId +
                 ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", dailyCost=" + dailyCost +
