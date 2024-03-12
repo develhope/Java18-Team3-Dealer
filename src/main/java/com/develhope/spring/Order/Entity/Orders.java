@@ -7,12 +7,12 @@ import jakarta.persistence.*;
 
 @Entity
 @Table
-public class Order {
+public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
     @Column(nullable = false)
-    private double advance;
+    private Double advance;
     @Column(nullable = false)
     private Boolean isPaid;
     @Column(nullable = false)
@@ -27,7 +27,7 @@ public class Order {
     @JoinColumn (name = "orderId", referencedColumnName = "sellerId")
     private SellerEntity sellerEntity;
 
-    public Order(Long orderId, double advance, Boolean isPaid, OrderStatus orderStatus, Vehicle vehicle, Buyer buyer, SellerEntity sellerEntity) {
+    public Orders(Long orderId, Double advance, Boolean isPaid, OrderStatus orderStatus, Vehicle vehicle, Buyer buyer, SellerEntity sellerEntity) {
         this.orderId = orderId;
         this.advance = advance;
         this.isPaid = isPaid;
@@ -37,7 +37,7 @@ public class Order {
         this.sellerEntity = sellerEntity;
     }
 
-    public Order() {
+    public Orders() {
     }
 
     public Long getOrderId() {
@@ -52,7 +52,7 @@ public class Order {
         return advance;
     }
 
-    public void setAdvance(double advance) {
+    public void setAdvance(Double advance) {
         this.advance = advance;
     }
 
@@ -98,7 +98,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Orders{" +
                 "orderId=" + orderId +
                 ", advance=" + advance +
                 ", isPaid=" + isPaid +
