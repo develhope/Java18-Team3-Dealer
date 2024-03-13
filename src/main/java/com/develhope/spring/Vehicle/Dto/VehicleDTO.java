@@ -1,55 +1,38 @@
-package com.develhope.spring.Vehicle.Entity;
+package com.develhope.spring.Vehicle.Dto;
 
-import com.develhope.spring.Rental.Entity.Rental;
-import jakarta.persistence.*;
+import com.develhope.spring.Vehicle.Entity.VehicleStatus;
+import com.develhope.spring.Vehicle.Entity.VehicleType;
+
 import java.time.Year;
 import java.util.List;
-@Entity
-@Table
-public class Vehicle {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long vehicleId;
-    @Column(nullable = false)
+
+public class VehicleDTO {
     private String brand;
-    @Column(nullable = false)
     private String model;
-    @Column(nullable = false)
     private int displacement;
-    @Column(nullable = false)
     private String color;
-    @Column(nullable = false)
     private int power;
-    @Column(nullable = false)
     private String transmission;
-    @Column(nullable = false)
     private Year registrationYear;
-    @Column(nullable = false)
     private String fullType;
-    @Column(nullable = false)
     private Double price;
-    @Column(nullable = false)
     private Double discount;
-    @Column(nullable = false)
     private List<String> accessories;
-    @Column(nullable = false)
     private Boolean isNew;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private VehicleStatus vehicleStatus;
-    @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
-    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
-        this.vehicleId = vehicleId;
+    public VehicleDTO() {
+    }
+
+    public VehicleDTO(String brand, String model, int displacement, String color, int power, String transmission, int registrationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
         this.brand = brand;
         this.model = model;
         this.displacement = displacement;
         this.color = color;
         this.power = power;
         this.transmission = transmission;
-        this.registrationYear = registationYear;
+        this.registrationYear = Year.of(registrationYear);
         this.fullType = fullType;
         this.price = price;
         this.discount = discount;
@@ -57,17 +40,6 @@ public class Vehicle {
         this.isNew = isNew;
         this.vehicleStatus = vehicleStatus;
         this.vehicleType = vehicleType;
-    }
-
-    public Vehicle() {
-    }
-
-    public Long getVehicleIdId() {
-        return vehicleId;
-    }
-
-    public void setVehicleIdId(Long id) {
-        this.vehicleId = id;
     }
 
     public String getBrand() {
@@ -122,8 +94,8 @@ public class Vehicle {
         return registrationYear;
     }
 
-    public void setRegistationYear(Year registationYear) {
-        this.registrationYear = registationYear;
+    public void setRegistationYear(int registationYear) {
+        this.registrationYear = Year.of(registationYear);
     }
 
     public String getFullType() {
@@ -184,9 +156,8 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "Veicolo{" +
-                "id=" + vehicleId +
-                ", brand='" + brand + '\'' +
+        return "VehicleDTO{" +
+                "brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", displacement=" + displacement +
                 ", color='" + color + '\'' +

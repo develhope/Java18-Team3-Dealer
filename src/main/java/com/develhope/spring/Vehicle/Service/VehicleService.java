@@ -1,5 +1,6 @@
 package com.develhope.spring.Vehicle.Service;
 
+import com.develhope.spring.Vehicle.Dto.VehicleDTO;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
@@ -11,17 +12,21 @@ public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
 
-    public Vehicle createVehicle(Vehicle vehicle) {
+    public Vehicle createVehicle(VehicleDTO vehicleDTO) {
+        Vehicle vehicle = convertToEntity(vehicleDTO);
         return vehicleRepository.save(vehicle);
     }
 
-    public Vehicle getVehicleById (Long vehicleId) {
-        return vehicleRepository.findById(vehicleId).orElse(null);
-    }
-
-    public Vehicle updateVehicle(Long vehicleId, Vehicle updateVehicle) {
+    public VehicleDTO getVehicleById (Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) return null;
+        return convertToDTO(vehicle);
+    }
+
+    public Vehicle updateVehicle(Long vehicleId, VehicleDTO updateVehicleDTO) {
+        Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
+        if (vehicle == null) return null;
+        Vehicle updateVehicle = convertToEntity(updateVehicleDTO);
         vehicle.setBrand(updateVehicle.getBrand());
         vehicle.setModel(updateVehicle.getModel());
         vehicle.setDisplacement(updateVehicle.getDisplacement());
@@ -48,5 +53,43 @@ public class VehicleService {
 
     public void deleteVehicleById (Long vehicleId) {
         vehicleRepository.deleteById(vehicleId);
+    }
+
+    private Vehicle convertToEntity (VehicleDTO vehicleDTO) {
+        Vehicle vehicle = new Vehicle();
+        vehicle.setBrand(vehicleDTO.getBrand());
+        vehicle.setModel(vehicleDTO.getModel());
+        vehicle.setDisplacement(vehicleDTO.getDisplacement());
+        vehicle.setColor(vehicleDTO.getColor());
+        vehicle.setPower(vehicleDTO.getPower());
+        vehicle.setTransmission(vehicleDTO.getTransmission());
+        vehicle.setRegistationYear(vehicleDTO.getRegistationYear());
+        vehicle.setFullType(vehicleDTO.getFullType());
+        vehicle.setPrice(vehicleDTO.getPrice());
+        vehicle.setDiscount(vehicleDTO.getDiscount());
+        vehicle.setAccessories(vehicleDTO.getAccessories());
+        vehicle.setNew(vehicleDTO.getNew());
+        vehicle.setVehicleStatus(vehicleDTO.getVehicleStatus());
+        vehicle.setVehicleType(vehicleDTO.getVehicleType());
+        return vehicle;
+    }
+
+    private VehicleDTO convertToDTO (Vehicle vehicle) {
+        VehicleDTO vehicleDTO = new VehicleDTO();
+        vehicleDTO.setBrand(vehicle.getBrand());
+        vehicleDTO.setModel(vehicle.getModel());
+        vehicleDTO.setDisplacement(vehicle.getDisplacement());
+        vehicleDTO.setColor(vehicle.getColor());
+        vehicleDTO.setPower(vehicle.getPower());
+        vehicleDTO.setTransmission(vehicle.getTransmission());
+        vehicleDTO.setRegistationYear(vehicle.getRegistationYear().getValue());
+        vehicleDTO.setFullType(vehicle.getFullType());
+        vehicleDTO.setPrice(vehicle.getPrice());
+        vehicleDTO.setDiscount(vehicle.getDiscount());
+        vehicleDTO.setAccessories(vehicle.getAccessories());
+        vehicleDTO.setNew(vehicle.getNew());
+        vehicleDTO.setVehicleStatus(vehicle.getVehicleStatus());
+        vehicleDTO.setVehicleType(vehicle.getVehicleType());
+        return vehicleDTO;
     }
 }
