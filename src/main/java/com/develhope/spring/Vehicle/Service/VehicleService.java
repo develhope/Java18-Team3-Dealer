@@ -1,9 +1,11 @@
 package com.develhope.spring.Vehicle.Service;
 
 import com.develhope.spring.Vehicle.Dto.VehicleDTO;
+import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
+import jdk.jshell.Snippet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,10 +46,10 @@ public class VehicleService {
         return vehicleRepository.save(vehicle);
     }
 
-    public Vehicle chanceStatus (Long vehicleId, VehicleStatus vehicleStatus) {
+    public Vehicle chanceStatus (Long vehicleId, VehicleStatusDTO vehicleStatusDTO) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) return null;
-        vehicle.setVehicleStatus(vehicleStatus);
+        vehicle.setVehicleStatus(VehicleStatus.valueOf(vehicleStatusDTO.getStatus()));
         return vehicleRepository.save(vehicle);
     }
 
