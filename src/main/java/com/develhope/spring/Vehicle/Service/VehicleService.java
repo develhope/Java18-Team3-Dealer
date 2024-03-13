@@ -1,11 +1,15 @@
 package com.develhope.spring.Vehicle.Service;
 
 import com.develhope.spring.Vehicle.Dto.VehicleDTO;
+import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class VehicleService {
@@ -44,10 +48,10 @@ public class VehicleService {
         return vehicleRepository.save(vehicle);
     }
 
-    public Vehicle chanceStatus (Long vehicleId, VehicleStatus vehicleStatus) {
+    public Vehicle chanceStatus (Long vehicleId, VehicleStatusDTO vehicleStatusDTO) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) return null;
-        vehicle.setVehicleStatus(vehicleStatus);
+        vehicle.setVehicleStatus(VehicleStatus.valueOf(vehicleStatusDTO.getStatus()));
         return vehicleRepository.save(vehicle);
     }
 
@@ -72,6 +76,15 @@ public class VehicleService {
         vehicle.setVehicleStatus(vehicleDTO.getVehicleStatus());
         vehicle.setVehicleType(vehicleDTO.getVehicleType());
         return vehicle;
+    }
+
+    public List<VehicleDTO> getVehicleByColor (String color) {
+        List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByColor(color);
+        List<VehicleDTO> vehicleDTOList = new ArrayList<>();
+        for (Vehicle vehicle : vehicleList) {
+            vehicleDTOList.add(convertToDTO(vehicle));
+        }
+        return vehicleDTOList;
     }
 
     private VehicleDTO convertToDTO (Vehicle vehicle) {
