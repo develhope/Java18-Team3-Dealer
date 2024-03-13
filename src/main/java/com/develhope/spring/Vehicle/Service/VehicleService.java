@@ -28,6 +28,15 @@ public class VehicleService {
         return convertToDTO(vehicle);
     }
 
+    public List<VehicleDTO> getVehicleByColor (String color) {
+        List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByColor(color);
+        List<VehicleDTO> vehicleDTOList = new ArrayList<>();
+        for (Vehicle vehicle : vehicleList) {
+            vehicleDTOList.add(convertToDTO(vehicle));
+        }
+        return vehicleDTOList;
+    }
+
     public Vehicle updateVehicle(Long vehicleId, VehicleDTO updateVehicleDTO) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) return null;
@@ -77,15 +86,6 @@ public class VehicleService {
         vehicle.setVehicleStatus(vehicleDTO.getVehicleStatus());
         vehicle.setVehicleType(vehicleDTO.getVehicleType());
         return vehicle;
-    }
-
-    public List<VehicleDTO> getVehicleByColor (String color) {
-        List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByColor(color);
-        List<VehicleDTO> vehicleDTOList = new ArrayList<>();
-        for (Vehicle vehicle : vehicleList) {
-            vehicleDTOList.add(convertToDTO(vehicle));
-        }
-        return vehicleDTOList;
     }
 
     private VehicleDTO convertToDTO (Vehicle vehicle) {
