@@ -17,8 +17,8 @@ public class VehicleDTO {
     private int registrationYear;
     private String fullType;
     private BigDecimal price;
-    private Double discount;
-    private List<String> accessories;
+    private BigDecimal discount;
+    private String accessories;
     private Boolean isNew;
     private VehicleStatus vehicleStatus;
     private VehicleType vehicleType;
@@ -26,7 +26,7 @@ public class VehicleDTO {
     public VehicleDTO() {
     }
 
-    public VehicleDTO(String brand, String model, int displacement, String color, int power, String transmission, int registrationYear, String fullType, BigDecimal price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
+    public VehicleDTO(String brand, String model, int displacement, String color, int power, String transmission, int registrationYear, String fullType, BigDecimal price, BigDecimal discount, String accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
         this.brand = brand;
         this.model = model;
         this.displacement = displacement;
@@ -115,19 +115,19 @@ public class VehicleDTO {
         this.price = price;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 
-    public List<String> getAccessories() {
+    public String getAccessories() {
         return accessories;
     }
 
-    public void setAccessories(List<String> accessories) {
+    public void setAccessories(String accessories) {
         this.accessories = accessories;
     }
 

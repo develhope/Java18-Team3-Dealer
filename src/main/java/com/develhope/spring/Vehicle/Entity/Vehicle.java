@@ -31,9 +31,9 @@ public class Vehicle {
     @Column(nullable = false)
     private BigDecimal price;
     @Column(nullable = false)
-    private Double discount;
+    private BigDecimal discount;
     @Column(nullable = false)
-    private List<String> accessories;
+    private String accessories;
     @Column(nullable = false)
     private Boolean isNew;
     @Column(nullable = false)
@@ -43,7 +43,7 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
-    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, BigDecimal price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
+    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, BigDecimal price, BigDecimal discount, String accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
         this.vehicleId = vehicleId;
         this.brand = brand;
         this.model = model;
@@ -144,19 +144,19 @@ public class Vehicle {
         this.price = price;
     }
 
-    public Double getDiscount() {
+    public BigDecimal getDiscount() {
         return discount;
     }
 
-    public void setDiscount(Double discount) {
+    public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
 
-    public List<String> getAccessories() {
+    public String getAccessories() {
         return accessories;
     }
 
-    public void setAccessories(List<String> accessories) {
+    public void setAccessories(String accessories) {
         this.accessories = accessories;
     }
 
