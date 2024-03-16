@@ -1,6 +1,12 @@
 package com.develhope.spring.Buyer.Entity;
 
+import com.develhope.spring.Order.Entity.Orders;
+import com.develhope.spring.Purchase.Entity.Purchase;
+import com.develhope.spring.Rental.Entity.Rental;
 import jakarta.persistence.*;
+
+import java.util.List;
+
 @Table
 @Entity
 public class Buyer {
@@ -17,6 +23,27 @@ public class Buyer {
     private String email;
     @Column(nullable = false, length = 10)
     private String password;
+    @OneToMany
+    private List<Orders> ordersList;
+    @OneToMany
+    private List<Purchase> purchaseList;
+    @OneToMany
+    private List<Rental> rentalList;
+
+    public Buyer(Long buyer_id, String firstName, String lastName, String telephoneNumber, String email, String password, List<Orders> ordersList, List<Purchase> purchaseList, List<Rental> rentalList) {
+        this.buyer_id = buyer_id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.password = password;
+        this.ordersList = ordersList;
+        this.purchaseList = purchaseList;
+        this.rentalList = rentalList;
+    }
+
+    public Buyer() {
+    }
 
     public Long getBuyer_id() {
         return buyer_id;
@@ -66,16 +93,28 @@ public class Buyer {
         this.password = password;
     }
 
-    public Buyer(Long buyer_id, String firstName, String lastName, String telephoneNumber, String email, String password) {
-        this.buyer_id = buyer_id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.telephoneNumber = telephoneNumber;
-        this.email = email;
-        this.password = password;
+    public List<Orders> getOrdersList() {
+        return ordersList;
     }
 
-    public Buyer() {
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
+    }
+
+    public List<Purchase> getPurchaseList() {
+        return purchaseList;
+    }
+
+    public void setPurchaseList(List<Purchase> purchaseList) {
+        this.purchaseList = purchaseList;
+    }
+
+    public List<Rental> getRentalList() {
+        return rentalList;
+    }
+
+    public void setRentalList(List<Rental> rentalList) {
+        this.rentalList = rentalList;
     }
 
     @Override
@@ -87,6 +126,9 @@ public class Buyer {
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", ordersList=" + ordersList +
+                ", purchaseList=" + purchaseList +
+                ", rentalList=" + rentalList +
                 '}';
     }
 }

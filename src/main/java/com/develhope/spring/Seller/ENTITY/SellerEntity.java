@@ -1,6 +1,10 @@
 package com.develhope.spring.Seller.ENTITY;
 
+import com.develhope.spring.Order.Entity.Orders;
+import com.develhope.spring.Rental.Entity.Rental;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table
@@ -18,14 +22,20 @@ public class SellerEntity {
         private String email;
         @Column(nullable = false, length = 10)
         private String password;
+        @OneToMany
+        private List<Orders> ordersList;
+        @OneToMany
+        private List<Rental> rentalList;
 
-    public SellerEntity(Long sellerId, String firstName, String lastName, String phoneNumber, String email, String password) {
+    public SellerEntity(Long sellerId, String firstName, String lastName, String phoneNumber, String email, String password, List<Orders> ordersList, List<Rental> rentalList) {
         this.sellerId = sellerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.password = password;
+        this.ordersList = ordersList;
+        this.rentalList = rentalList;
     }
 
     public SellerEntity() {
@@ -79,6 +89,22 @@ public class SellerEntity {
         this.password = password;
     }
 
+    public List<Orders> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<Orders> ordersList) {
+        this.ordersList = ordersList;
+    }
+
+    public List<Rental> getRentalList() {
+        return rentalList;
+    }
+
+    public void setRentalList(List<Rental> rentalList) {
+        this.rentalList = rentalList;
+    }
+
     @Override
     public String toString() {
         return "SellerEntity{" +
@@ -88,6 +114,8 @@ public class SellerEntity {
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", ordersList=" + ordersList +
+                ", rentalList=" + rentalList +
                 '}';
     }
 }
