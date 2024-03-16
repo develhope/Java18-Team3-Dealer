@@ -25,8 +25,8 @@ public class BuyerController {
     }
 
     @PutMapping("/updateBuyer/{buyerId}")
-    public Buyer updateBuyer(@PathVariable Long buyerId, @RequestBody Buyer buyer){
-        return buyerService.updateBuyer(buyerId, buyer);
+    public Buyer updateBuyer(@PathVariable Long buyerId, @RequestBody BuyerDTO buyerDTO){
+        return buyerService.updateBuyer(buyerId, buyerDTO);
     }
 
 }
