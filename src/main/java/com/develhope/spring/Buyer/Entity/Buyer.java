@@ -12,7 +12,7 @@ import java.util.List;
 public class Buyer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long buyer_id;
+    private Long buyerId;
     @Column(nullable = false, name = "Nome")
     private String firstName;
     @Column(nullable = false, name = "Cognome")
@@ -30,8 +30,8 @@ public class Buyer {
     @OneToMany
     private List<Rental> rentalList;
 
-    public Buyer(Long buyer_id, String firstName, String lastName, String telephoneNumber, String email, String password, List<Orders> ordersList, List<Purchase> purchaseList, List<Rental> rentalList) {
-        this.buyer_id = buyer_id;
+    public Buyer(Long buyerId, String firstName, String lastName, String telephoneNumber, String email, String password, List<Orders> ordersList, List<Purchase> purchaseList, List<Rental> rentalList) {
+        this.buyerId = buyerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephoneNumber = telephoneNumber;
@@ -45,12 +45,12 @@ public class Buyer {
     public Buyer() {
     }
 
-    public Long getBuyer_id() {
-        return buyer_id;
+    public Long getBuyerId() {
+        return buyerId;
     }
 
-    public void setBuyer_id(Long buyer_id) {
-        this.buyer_id = buyer_id;
+    public void setBuyerId(Long buyerId) {
+        this.buyerId = buyerId;
     }
 
     public String getFirstName() {
@@ -120,7 +120,7 @@ public class Buyer {
     @Override
     public String toString() {
         return "Buyer{" +
-                "buyer_id=" + buyer_id +
+                "buyerId=" + buyerId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +

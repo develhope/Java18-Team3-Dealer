@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long admin_id;
+    private Long adminId;
     @Column(nullable = false, name = "Nome")
     private String firstName;
     @Column(nullable = false, name = "Cognome")
@@ -15,8 +15,8 @@ public class Admin {
     @Column(nullable = false, length = 10)
     private String password;
 
-    public Admin(Long admin_id, String firstName, String lastName, String email, String password) {
-        this.admin_id = admin_id;
+    public Admin(Long adminId, String firstName, String lastName, String email, String password) {
+        this.adminId = adminId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -26,13 +26,13 @@ public class Admin {
     public Admin() {
     }
 
-    public Long getAdmin_id() {
-        return admin_id;
+    public Long getAdminId() {
+        return adminId;
     }
 
-    public void setId(Long admin_id) {
+    public void setId(Long adminId) {
 
-        this.admin_id = admin_id;
+        this.adminId = adminId;
     }
 
     public String getFirstName() {
@@ -70,7 +70,7 @@ public class Admin {
     @Override
     public String toString() {
         return "Admin{" +
-                "admin_id=" + admin_id +
+                "adminId=" + adminId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
