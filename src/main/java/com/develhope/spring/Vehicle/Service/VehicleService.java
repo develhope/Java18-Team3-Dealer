@@ -24,12 +24,17 @@ public class VehicleService {
 
     public VehicleDTO getVehicleById(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
-        if (vehicle == null) return null;
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
+        }
         return convertToDTO(vehicle);
     }
 
     public List<VehicleDTO> getVehicleByColor(String color) {
         List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByColor(color);
+        if (vehicleList == null) {
+            throw new IllegalArgumentException("No vehicle found with color: " + color);
+        }
         List<VehicleDTO> vehicleDTOList = new ArrayList<>();
         for (Vehicle vehicle : vehicleList) {
             vehicleDTOList.add(convertToDTO(vehicle));
@@ -39,7 +44,9 @@ public class VehicleService {
 
     public Vehicle updateVehicle(Long vehicleId, VehicleDTO updateVehicleDTO) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
-        if (vehicle == null) return null;
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
+        }
         Vehicle updateVehicle = convertToEntity(updateVehicleDTO);
         vehicle.setBrand(updateVehicle.getBrand());
         vehicle.setModel(updateVehicle.getModel());
@@ -74,7 +81,11 @@ public class VehicleService {
     }
 
     public void deleteVehicleById(Long vehicleId) {
-        vehicleRepository.deleteById(vehicleId);
+        Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
+        }
+        vehicleRepository.deleteById(vehicle.getVehicleIdId());
     }
 
     private Vehicle convertToEntity(VehicleDTO vehicleDTO) {
