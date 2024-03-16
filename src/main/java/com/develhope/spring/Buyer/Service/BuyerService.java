@@ -3,17 +3,11 @@ package com.develhope.spring.Buyer.Service;
 import com.develhope.spring.Buyer.DTO.BuyerDTO;
 import com.develhope.spring.Buyer.Entity.Buyer;
 import com.develhope.spring.Buyer.Repository.BuyerRepository;
-import com.develhope.spring.Order.Entity.Orders;
 import com.develhope.spring.Order.Repository.OrderRepository;
-import com.develhope.spring.Purchase.Entity.Purchase;
 import com.develhope.spring.Purchase.Repository.PurchaseRepository;
-import com.develhope.spring.Rental.Entity.Rental;
 import com.develhope.spring.Rental.RentalRepository.RentalRepository;
-import com.develhope.spring.Vehicle.Entity.Vehicle;
-import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -43,39 +37,29 @@ public class BuyerService {
         buyerRepository.deleteById(buyerId);
     }
 
-    //metodo per la ricerca di un veicolo tramite ID
-//    public Vehicle findVehicleById(Long vehicleId) {
-//        return vehicleRepository.findById(vehicleId).orElse(null);
+    //metodo per vedere i propri ordini
+//    public List<Orders> getOrders(Long buyerId, Long orderId) {
+//        Optional<Buyer> user = buyerRepository.findById(buyerId);
+//        if (user.isPresent()) {
+//            Optional<Orders> orderList = orderRepository.findById(orderId);
+//        }
+//        return null;
+//    }
+    //vedere gli acquisti
+//    public List<Purchase> getPurchase(Long buyerId, Long purchaseId){
+//        Optional<Buyer> buyer = buyerRepository.findById(buyerId);
+//        if(buyer.isPresent()){
+//            Optional<Purchase> purchaseList = purchaseRepository.findById(purchaseId);
+//        }
+//        return null;
 //    }
 
-    //metodo per vedere i propri ordini
-    public List<Orders> getOrders(Long buyerId, Long orderId) {
-        Optional<Buyer> user = buyerRepository.findById(buyerId);
-        if (user.isPresent()) {
-            Optional<Orders> orderList = orderRepository.findById(orderId);
-        }
-        return null;
-    }
-    //vedere gli acquisti
-    public List<Purchase> getPurchase(Long buyerId, Long purchaseId){
-        Optional<Buyer> buyer = buyerRepository.findById(buyerId);
-        if(buyer.isPresent()){
-            Optional<Purchase> purchaseList = purchaseRepository.findById(purchaseId);
-        }
-        return null;
-    }
 
-
-    //metodo per la cancellazione di un ordine
-    public void deleteOrderById(Long orderId) {
-        orderRepository.deleteById(orderId);
-    }
 
     //modifica utente
     public Buyer updateBuyer(Long buyerId, Buyer buyer) {
         Buyer buyerUpdate = buyerRepository.findById(buyerId).orElse(null);
         if (buyerUpdate != null) {
-            //buyerUpdate.setBuyerId(buyer.getBuyerId());
             buyerUpdate.setFirstName(buyer.getFirstName());
             buyerUpdate.setLastName(buyer.getLastName());
             buyerUpdate.setEmail(buyer.getEmail());
@@ -86,15 +70,7 @@ public class BuyerService {
         return null;
     }
 
-    //Creare un noleggio
-    public Rental createRent(Rental rental) {
-        return rentalRepository.save(rental);
-    }
-
-    //Vedere i propri noleggi
-    public List<Rental> rentalList() {
-        return rentalRepository.findAll();
-    }
+    /*SELECT * FROM Rental WHERE buyerId = ?1*/
 
     private Buyer convertToEntity(BuyerDTO buyerDTO){
         Buyer buyer = new Buyer();
