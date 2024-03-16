@@ -57,14 +57,15 @@ public class BuyerService {
 
 
     //modifica utente
-    public Buyer updateBuyer(Long buyerId, Buyer buyer) {
+    public Buyer updateBuyer(Long buyerId, BuyerDTO buyerDTO) {
+        Buyer saveDTO = convertToEntity(buyerDTO);
         Buyer buyerUpdate = buyerRepository.findById(buyerId).orElse(null);
         if (buyerUpdate != null) {
-            buyerUpdate.setFirstName(buyer.getFirstName());
-            buyerUpdate.setLastName(buyer.getLastName());
-            buyerUpdate.setEmail(buyer.getEmail());
-            buyerUpdate.setPassword(buyer.getPassword());
-            buyerUpdate.setTelephoneNumber(buyer.getTelephoneNumber());
+            buyerUpdate.setFirstName(saveDTO.getFirstName());
+            buyerUpdate.setLastName(saveDTO.getLastName());
+            buyerUpdate.setEmail(saveDTO.getEmail());
+            buyerUpdate.setPassword(saveDTO.getPassword());
+            buyerUpdate.setTelephoneNumber(saveDTO.getTelephoneNumber());
             return buyerRepository.save(buyerUpdate);
         }
         return null;
