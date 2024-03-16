@@ -1,5 +1,7 @@
 package com.develhope.spring.Rental.Entity;
 
+import com.develhope.spring.Buyer.Entity.Buyer;
+import com.develhope.spring.Seller.ENTITY.SellerEntity;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
@@ -24,14 +26,35 @@ public class Rental {
     private boolean paidFlag;
     @Enumerated(EnumType.STRING)
     private RentalStatus rentalStatus;
+    @ManyToOne
+    private Buyer buyer;
+    @ManyToOne
+    private SellerEntity sellerEntity;
+    @ManyToOne
+    private Vehicle vehicle;
 
+    public Rental(Long rentalId, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus, Buyer buyer, SellerEntity sellerEntity, Vehicle vehicle) {
+        this.rentalId = rentalId;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.dailyCost = dailyCost;
+        this.totalCost = totalCost;
+        this.paidFlag = paidFlag;
+        this.rentalStatus = rentalStatus;
+        this.buyer = buyer;
+        this.sellerEntity = sellerEntity;
+        this.vehicle = vehicle;
+    }
+
+    public Rental() {
+    }
 
     public Long getRentalId() {
         return rentalId;
     }
 
-    public void setId(Long id) {
-        this.rentalId = id;
+    public void setRentalId(Long rentalId) {
+        this.rentalId = rentalId;
     }
 
     public LocalDate getStartDate() {
@@ -74,7 +97,6 @@ public class Rental {
         this.paidFlag = paidFlag;
     }
 
-
     public RentalStatus getRentalStatus() {
         return rentalStatus;
     }
@@ -83,20 +105,28 @@ public class Rental {
         this.rentalStatus = rentalStatus;
     }
 
-
-
-    public Rental(Long rentalId, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus) {
-        this.rentalId = rentalId;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.dailyCost = dailyCost;
-        this.totalCost = totalCost;
-        this.paidFlag = paidFlag;
-        this.rentalStatus = rentalStatus;
-
+    public Buyer getBuyer() {
+        return buyer;
     }
 
-    public Rental() {
+    public void setBuyer(Buyer buyer) {
+        this.buyer = buyer;
+    }
+
+    public SellerEntity getSellerEntity() {
+        return sellerEntity;
+    }
+
+    public void setSellerEntity(SellerEntity sellerEntity) {
+        this.sellerEntity = sellerEntity;
+    }
+
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
     }
 
     @Override
@@ -109,6 +139,9 @@ public class Rental {
                 ", totalCost=" + totalCost +
                 ", paidFlag=" + paidFlag +
                 ", rentalStatus=" + rentalStatus +
+                ", buyer=" + buyer +
+                ", sellerEntity=" + sellerEntity +
+                ", vehicle=" + vehicle +
                 '}';
     }
 }
