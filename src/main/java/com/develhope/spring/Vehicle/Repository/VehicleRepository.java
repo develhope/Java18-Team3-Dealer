@@ -9,6 +9,4 @@ import java.util.List;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
-@Query(value = "SELECT * FROM VEHICLE WHERE COLOR = ?1", nativeQuery = true)
-    List<Vehicle> getAllVehicleByColor(String color);
 }

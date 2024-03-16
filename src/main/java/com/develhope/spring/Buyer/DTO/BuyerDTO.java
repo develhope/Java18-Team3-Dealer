@@ -1,39 +1,12 @@
-package com.develhope.spring.Admin.Entity;
-import jakarta.persistence.*;
-@Table
-@Entity
-public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long adminId;
-    @Column(nullable = false, name = "Nome")
+package com.develhope.spring.Buyer.DTO;
+
+
+public class BuyerDTO {
     private String firstName;
-    @Column(nullable = false, name = "Cognome")
     private String lastName;
-    @Column(unique = true, name = "Indirizzo email", nullable = false)
+    private String telephoneNumber;
     private String email;
-    @Column(nullable = false, length = 10)
     private String password;
-
-    public Admin(Long adminId, String firstName, String lastName, String email, String password) {
-        this.adminId = adminId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.password = password;
-    }
-
-    public Admin() {
-    }
-
-    public Long getAdminId() {
-        return adminId;
-    }
-
-    public void setId(Long adminId) {
-
-        this.adminId = adminId;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -49,6 +22,14 @@ public class Admin {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getTelephoneNumber() {
+        return telephoneNumber;
+    }
+
+    public void setTelephoneNumber(String telephoneNumber) {
+        this.telephoneNumber = telephoneNumber;
     }
 
     public String getEmail() {
@@ -67,12 +48,23 @@ public class Admin {
         this.password = password;
     }
 
+    public BuyerDTO(Long buyer_id, String firstName, String lastName, String telephoneNumber, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.password = password;
+    }
+
+    public BuyerDTO() {
+    }
+
     @Override
     public String toString() {
-        return "Admin{" +
-                "adminId=" + adminId +
+        return "BuyerDTO{" +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 '}';
