@@ -1,30 +1,12 @@
-package com.develhope.spring.Buyer.Entity;
+package com.develhope.spring.Buyer.DTO;
 
-import jakarta.persistence.*;
-@Table
-@Entity
-public class Buyer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long buyerId;
-    @Column(nullable = false, name = "Nome")
+
+public class BuyerDTO {
     private String firstName;
-    @Column(nullable = false, name = "Cognome")
     private String lastName;
-    @Column(nullable = false, name = "Numero di telefono")
     private String telephoneNumber;
-    @Column(unique = true, name = "Indirizzo email")
     private String email;
-    @Column(nullable = false, length = 10)
     private String password;
-
-    public Long getBuyerId() {
-        return buyerId;
-    }
-
-    public void setBuyerId(Long buyerId) {
-        this.buyerId = buyerId;
-    }
 
     public String getFirstName() {
         return firstName;
@@ -66,8 +48,7 @@ public class Buyer {
         this.password = password;
     }
 
-    public Buyer(Long buyerId, String firstName, String lastName, String telephoneNumber, String email, String password) {
-        this.buyerId = buyerId;
+    public BuyerDTO(Long buyer_id, String firstName, String lastName, String telephoneNumber, String email, String password) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephoneNumber = telephoneNumber;
@@ -75,13 +56,12 @@ public class Buyer {
         this.password = password;
     }
 
-    public Buyer() {
+    public BuyerDTO() {
     }
 
     @Override
     public String toString() {
-        return "Buyer{" +
-                "buyerId=" + buyerId +
+        return "BuyerDTO{" +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
