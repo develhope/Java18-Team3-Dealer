@@ -1,27 +1,30 @@
 package com.develhope.spring.Vehicle.Dto;
 
-public class VehicleStatusDTO {
-    private String status;
+import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 
-    public VehicleStatusDTO(String status) {
-        this.status = status;
+public class VehicleStatusDTO {
+    private VehicleStatus vehicleStatus;
+
+    public VehicleStatusDTO(VehicleStatus vehicleStatus) {
+        this.vehicleStatus = vehicleStatus;
     }
 
     public VehicleStatusDTO() {
     }
 
-    public String getStatus() {
-        return status;
+    public VehicleStatus getVehicleStatus() {
+        return vehicleStatus;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setVehicleStatus(VehicleStatus vehicleStatus) {
+        this.vehicleStatus = vehicleStatus;
     }
 
     @Override
     public String toString() {
         return "VehicleStatusDTO{" +
-                "status='" + status + '\'' +
+                "vehicleStatus=" + vehicleStatus +
                 '}';
     }
 }
+

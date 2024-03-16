@@ -27,7 +27,7 @@ public class Rental {
 
 
     public Long getRentalId() {
-        return getRentalId();
+        return rentalId;
     }
 
     public void setId(Long id) {

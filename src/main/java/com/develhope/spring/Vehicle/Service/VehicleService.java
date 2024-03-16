@@ -5,10 +5,10 @@ import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
-import jdk.jshell.Snippet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,13 +22,13 @@ public class VehicleService {
         return vehicleRepository.save(vehicle);
     }
 
-    public VehicleDTO getVehicleById (Long vehicleId) {
+    public VehicleDTO getVehicleById(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) return null;
         return convertToDTO(vehicle);
     }
 
-    public List<VehicleDTO> getVehicleByColor (String color) {
+    public List<VehicleDTO> getVehicleByColor(String color) {
         List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByColor(color);
         List<VehicleDTO> vehicleDTOList = new ArrayList<>();
         for (Vehicle vehicle : vehicleList) {
@@ -58,18 +58,26 @@ public class VehicleService {
         return vehicleRepository.save(vehicle);
     }
 
-    public Vehicle chanceStatus (Long vehicleId, VehicleStatusDTO vehicleStatusDTO) {
+    public Vehicle chanceStatus(Long vehicleId, VehicleStatusDTO vehicleStatusDTO) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
-        if (vehicle == null) return null;
-        vehicle.setVehicleStatus(VehicleStatus.valueOf(vehicleStatusDTO.getStatus()));
-        return vehicleRepository.save(vehicle);
+        if (vehicle == null) {
+            throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
+        }
+        if (vehicleStatusDTO.getVehicleStatus() == VehicleStatus.ORDERABLE
+                || vehicleStatusDTO.getVehicleStatus() == VehicleStatus.PURCHASABLE
+                || vehicleStatusDTO.getVehicleStatus() == VehicleStatus.NOT_AVAILABLE) {
+            vehicle.setVehicleStatus(vehicleStatusDTO.getVehicleStatus());
+            return vehicleRepository.save(vehicle);
+        } else {
+            throw new IllegalArgumentException("Status not valid: " + vehicleStatusDTO.getVehicleStatus());
+        }
     }
 
-    public void deleteVehicleById (Long vehicleId) {
+    public void deleteVehicleById(Long vehicleId) {
         vehicleRepository.deleteById(vehicleId);
     }
 
-    private Vehicle convertToEntity (VehicleDTO vehicleDTO) {
+    private Vehicle convertToEntity(VehicleDTO vehicleDTO) {
         Vehicle vehicle = new Vehicle();
         vehicle.setBrand(vehicleDTO.getBrand());
         vehicle.setModel(vehicleDTO.getModel());
@@ -77,7 +85,7 @@ public class VehicleService {
         vehicle.setColor(vehicleDTO.getColor());
         vehicle.setPower(vehicleDTO.getPower());
         vehicle.setTransmission(vehicleDTO.getTransmission());
-        vehicle.setRegistationYear(vehicleDTO.getRegistationYear());
+        vehicle.setRegistationYear(Year.of(vehicleDTO.getRegistationYear()));
         vehicle.setFullType(vehicleDTO.getFullType());
         vehicle.setPrice(vehicleDTO.getPrice());
         vehicle.setDiscount(vehicleDTO.getDiscount());
@@ -88,7 +96,7 @@ public class VehicleService {
         return vehicle;
     }
 
-    private VehicleDTO convertToDTO (Vehicle vehicle) {
+    private VehicleDTO convertToDTO(Vehicle vehicle) {
         VehicleDTO vehicleDTO = new VehicleDTO();
         vehicleDTO.setBrand(vehicle.getBrand());
         vehicleDTO.setModel(vehicle.getModel());

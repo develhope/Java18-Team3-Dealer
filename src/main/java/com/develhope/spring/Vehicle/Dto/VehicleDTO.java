@@ -3,6 +3,7 @@ package com.develhope.spring.Vehicle.Dto;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Entity.VehicleType;
 
+import java.math.BigDecimal;
 import java.time.Year;
 import java.util.List;
 
@@ -13,9 +14,9 @@ public class VehicleDTO {
     private String color;
     private int power;
     private String transmission;
-    private Year registrationYear;
+    private int registrationYear;
     private String fullType;
-    private Double price;
+    private BigDecimal price;
     private Double discount;
     private List<String> accessories;
     private Boolean isNew;
@@ -25,14 +26,14 @@ public class VehicleDTO {
     public VehicleDTO() {
     }
 
-    public VehicleDTO(String brand, String model, int displacement, String color, int power, String transmission, int registrationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
+    public VehicleDTO(String brand, String model, int displacement, String color, int power, String transmission, int registrationYear, String fullType, BigDecimal price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
         this.brand = brand;
         this.model = model;
         this.displacement = displacement;
         this.color = color;
         this.power = power;
         this.transmission = transmission;
-        this.registrationYear = Year.of(registrationYear);
+        this.registrationYear = registrationYear;
         this.fullType = fullType;
         this.price = price;
         this.discount = discount;
@@ -90,12 +91,12 @@ public class VehicleDTO {
         this.transmission = transmission;
     }
 
-    public Year getRegistationYear() {
+    public int getRegistationYear() {
         return registrationYear;
     }
 
     public void setRegistationYear(int registationYear) {
-        this.registrationYear = Year.of(registationYear);
+        this.registrationYear = registationYear;
     }
 
     public String getFullType() {
@@ -106,11 +107,11 @@ public class VehicleDTO {
         this.fullType = fullType;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

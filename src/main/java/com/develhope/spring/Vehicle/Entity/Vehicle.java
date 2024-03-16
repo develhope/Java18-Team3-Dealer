@@ -2,6 +2,8 @@ package com.develhope.spring.Vehicle.Entity;
 
 import com.develhope.spring.Rental.Entity.Rental;
 import jakarta.persistence.*;
+
+import java.math.BigDecimal;
 import java.time.Year;
 import java.util.List;
 @Entity
@@ -27,7 +29,7 @@ public class Vehicle {
     @Column(nullable = false)
     private String fullType;
     @Column(nullable = false)
-    private Double price;
+    private BigDecimal price;
     @Column(nullable = false)
     private Double discount;
     @Column(nullable = false)
@@ -41,7 +43,7 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
-    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, Double price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
+    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, BigDecimal price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
         this.vehicleId = vehicleId;
         this.brand = brand;
         this.model = model;
@@ -134,11 +136,11 @@ public class Vehicle {
         this.fullType = fullType;
     }
 
-    public Double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
