@@ -5,10 +5,20 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Repository
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query(value = "SELECT * FROM VEHICLE WHERE COLOR = ?1", nativeQuery = true)
     List<Vehicle> getAllVehicleByColor(String color);
+
+    @Query(value = "SELECT * FROM VEHICLE WHERE PRICE > ?1 OR PRICE < ?2", nativeQuery = true)
+    List<Vehicle> getAllVehicleByPrice(BigDecimal minPrice, BigDecimal maxPrice);
+
+    @Query(value = "SELECT * FROM VEHICLE WHERE BRAND = ?1", nativeQuery = true)
+    List<Vehicle> getAllVehicleByBrand(String brand);
+
+    @Query(value = "SELECT * FROM VEHICLE WHERE MODEL = ?1", nativeQuery = true)
+    List<Vehicle> getAllVehicleByModel(String model);
 }

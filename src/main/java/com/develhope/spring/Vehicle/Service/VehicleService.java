@@ -8,6 +8,7 @@ import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +31,46 @@ public class VehicleService {
         return convertToDTO(vehicle);
     }
 
+    public List<VehicleDTO> getVehicleByPrice(BigDecimal minPrice, BigDecimal maxPrice) { //dare valori default in controller
+        if (minPrice.compareTo(maxPrice) > 0) {
+            throw new IllegalArgumentException("the lower price cannot be greater than the higher price");
+        }
+        List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByPrice(minPrice, maxPrice);
+        List<VehicleDTO> vehicleDTOList = new ArrayList<>();
+        for (Vehicle vehicle : vehicleList) {
+            vehicleDTOList.add(convertToDTO(vehicle));
+        }
+        return vehicleDTOList;
+    }
+
     public List<VehicleDTO> getVehicleByColor(String color) {
         List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByColor(color);
-        if (vehicleList == null) {
+        if (vehicleList.isEmpty()) {
             throw new IllegalArgumentException("No vehicle found with color: " + color);
+        }
+        List<VehicleDTO> vehicleDTOList = new ArrayList<>();
+        for (Vehicle vehicle : vehicleList) {
+            vehicleDTOList.add(convertToDTO(vehicle));
+        }
+        return vehicleDTOList;
+    }
+
+    public List<VehicleDTO> getVehicleByBrand(String brand) {
+        List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByBrand(brand);
+        if (vehicleList.isEmpty()) {
+            throw new IllegalArgumentException("No vehicle found with brand: " + brand);
+        }
+        List<VehicleDTO> vehicleDTOList = new ArrayList<>();
+        for (Vehicle vehicle : vehicleList) {
+            vehicleDTOList.add(convertToDTO(vehicle));
+        }
+        return vehicleDTOList;
+    }
+
+    public List<VehicleDTO> getVehicleByModel(String model) {
+        List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByModel(model);
+        if (vehicleList.isEmpty()) {
+            throw new IllegalArgumentException("No vehicle found with model: " + model);
         }
         List<VehicleDTO> vehicleDTOList = new ArrayList<>();
         for (Vehicle vehicle : vehicleList) {
