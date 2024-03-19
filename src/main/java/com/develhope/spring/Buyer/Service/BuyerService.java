@@ -10,8 +10,6 @@ import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class BuyerService {
@@ -26,37 +24,16 @@ public class BuyerService {
     @Autowired
     private PurchaseRepository purchaseRepository;
 
-    //metodo per la creazione di un cliente
     public Buyer createBuyer(BuyerDTO buyerDTO) {
-       Buyer saveDTO = convertToEntity(buyerDTO);
+        Buyer saveDTO = convertToEntity(buyerDTO);
         return buyerRepository.save(saveDTO);
     }
 
-    //metodo per eliminare un cliente
     public void deleteBuyerByID(Long buyerId) {
         buyerRepository.deleteById(buyerId);
     }
 
-    //metodo per vedere i propri ordini
-//    public List<Orders> getOrders(Long buyerId, Long orderId) {
-//        Optional<Buyer> user = buyerRepository.findById(buyerId);
-//        if (user.isPresent()) {
-//            Optional<Orders> orderList = orderRepository.findById(orderId);
-//        }
-//        return null;
-//    }
-    //vedere gli acquisti
-//    public List<Purchase> getPurchase(Long buyerId, Long purchaseId){
-//        Optional<Buyer> buyer = buyerRepository.findById(buyerId);
-//        if(buyer.isPresent()){
-//            Optional<Purchase> purchaseList = purchaseRepository.findById(purchaseId);
-//        }
-//        return null;
-//    }
 
-
-
-    //modifica utente
     public Buyer updateBuyer(Long buyerId, BuyerDTO buyerDTO) {
         Buyer saveDTO = convertToEntity(buyerDTO);
         Buyer buyerUpdate = buyerRepository.findById(buyerId).orElse(null);
@@ -71,9 +48,7 @@ public class BuyerService {
         return null;
     }
 
-    /*SELECT * FROM Rental WHERE buyerId = ?1*/
-
-    private Buyer convertToEntity(BuyerDTO buyerDTO){
+    private Buyer convertToEntity(BuyerDTO buyerDTO) {
         Buyer buyer = new Buyer();
         buyer.setFirstName(buyerDTO.getFirstName());
         buyer.setLastName(buyerDTO.getLastName());
@@ -82,7 +57,8 @@ public class BuyerService {
         buyer.setTelephoneNumber(buyerDTO.getTelephoneNumber());
         return buyer;
     }
-    private BuyerDTO convertToDTO(Buyer buyer){
+
+    private BuyerDTO convertToDTO(Buyer buyer) {
         BuyerDTO buyerDTO = new BuyerDTO();
         buyerDTO.setFirstName(buyer.getFirstName());
         buyerDTO.setLastName(buyer.getLastName());
@@ -91,16 +67,4 @@ public class BuyerService {
         buyerDTO.setTelephoneNumber(buyer.getTelephoneNumber());
         return buyerDTO;
     }
-//@Query(value = "SELECT * FROM Vehicle WHERE VehicleStatus = ORDERABLE", nativeQuery = true)
-//    List<Vehicle> findyByStatusOrderable();
-//@Query(value = "SELECT * FROM Vehicle WHERE VehicleStatus = PURCHASABLE", nativeQuery = true)
-//List<Vehicle> findyByStatusPurchasable();
 }
-//@Query(value = "SELECT brand FROM Vehicle", nativeQuery = true)
-//List<Vehicle> findByBrand(String brand);
-
-//List<Vehicle> findByModel(String model);
-
-//List<Vehicle> findByColor(String color);
-
-//List<Vehicle> findByPrice(String price);
