@@ -130,12 +130,12 @@ public class VehicleDTO {
         this.accessories = accessories;
     }
 
-    public Boolean getNew() {
+    public Boolean getIsNew() {
         return isNew;
     }
 
-    public void setNew(Boolean aNew) {
-        isNew = aNew;
+    public void setIsNew(Boolean isNew) {
+        this.isNew = isNew;
     }
 
     public VehicleStatus getVehicleStatus() {

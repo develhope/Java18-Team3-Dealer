@@ -128,7 +128,7 @@ public class VehicleService {
         vehicle.setPrice(updateVehicle.getPrice());
         vehicle.setDiscount(updateVehicle.getDiscount());
         vehicle.setAccessories(updateVehicle.getAccessories());
-        vehicle.setNew(updateVehicle.getNew());
+        vehicle.setIsNew(updateVehicle.getIsNew());
         vehicle.setVehicleStatus(updateVehicle.getVehicleStatus());
         vehicle.setVehicleType(updateVehicle.getVehicleType());
         vehicleRepository.save(vehicle);
@@ -155,8 +155,9 @@ public class VehicleService {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) {
             throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
+        } else {
+            vehicleRepository.deleteById(vehicleId);
         }
-        vehicleRepository.deleteById(vehicle.getVehicleIdId());
     }
 
     private Vehicle convertToEntity(VehicleDTO vehicleDTO) {
@@ -167,12 +168,13 @@ public class VehicleService {
         vehicle.setColor(vehicleDTO.getColor());
         vehicle.setPower(vehicleDTO.getPower());
         vehicle.setTransmission(vehicleDTO.getTransmission());
+      //  vehicle.setRegistrationYear(vehicleDTO.getRegistrationYear());
         vehicle.setRegistrationYear(Year.of(vehicleDTO.getRegistrationYear()));
         vehicle.setFullType(vehicleDTO.getFullType());
         vehicle.setPrice(vehicleDTO.getPrice());
         vehicle.setDiscount(vehicleDTO.getDiscount());
         vehicle.setAccessories(vehicleDTO.getAccessories());
-        vehicle.setNew(vehicleDTO.getNew());
+        vehicle.setIsNew(vehicleDTO.getIsNew());
         vehicle.setVehicleStatus(vehicleDTO.getVehicleStatus());
         vehicle.setVehicleType(vehicleDTO.getVehicleType());
         return vehicle;
@@ -186,12 +188,13 @@ public class VehicleService {
         vehicleDTO.setColor(vehicle.getColor());
         vehicleDTO.setPower(vehicle.getPower());
         vehicleDTO.setTransmission(vehicle.getTransmission());
+       // vehicleDTO.setRegistrationYear(vehicle.getRegistrationYear());
         vehicleDTO.setRegistrationYear(vehicle.getRegistrationYear().getValue());
         vehicleDTO.setFullType(vehicle.getFullType());
         vehicleDTO.setPrice(vehicle.getPrice());
         vehicleDTO.setDiscount(vehicle.getDiscount());
         vehicleDTO.setAccessories(vehicle.getAccessories());
-        vehicleDTO.setNew(vehicle.getNew());
+        vehicleDTO.setIsNew(vehicle.getIsNew());
         vehicleDTO.setVehicleStatus(vehicle.getVehicleStatus());
         vehicleDTO.setVehicleType(vehicle.getVehicleType());
         return vehicleDTO;
