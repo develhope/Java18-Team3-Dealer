@@ -4,8 +4,7 @@ import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Entity.VehicleType;
 
 import java.math.BigDecimal;
-import java.time.Year;
-import java.util.List;
+
 
 public class VehicleDTO {
     private String brand;
@@ -91,12 +90,12 @@ public class VehicleDTO {
         this.transmission = transmission;
     }
 
-    public int getRegistationYear() {
+    public int getRegistrationYear() {
         return registrationYear;
     }
 
-    public void setRegistationYear(int registationYear) {
-        this.registrationYear = registationYear;
+    public void setRegistrationYear(int registrationYear) {
+        this.registrationYear = registrationYear;
     }
 
     public String getFullType() {

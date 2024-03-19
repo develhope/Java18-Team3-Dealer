@@ -1,11 +1,11 @@
 package com.develhope.spring.Vehicle.Entity;
 
-import com.develhope.spring.Rental.Entity.Rental;
+
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.time.Year;
-import java.util.List;
+
 @Entity
 @Table
 public class Vehicle {
@@ -43,7 +43,7 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
-    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, BigDecimal price, BigDecimal discount, String accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
+    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registrationYear, String fullType, BigDecimal price, BigDecimal discount, String accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
         this.vehicleId = vehicleId;
         this.brand = brand;
         this.model = model;
@@ -51,7 +51,7 @@ public class Vehicle {
         this.color = color;
         this.power = power;
         this.transmission = transmission;
-        this.registrationYear = registationYear;
+        this.registrationYear = registrationYear;
         this.fullType = fullType;
         this.price = price;
         this.discount = discount;
@@ -120,12 +120,12 @@ public class Vehicle {
         this.transmission = transmission;
     }
 
-    public Year getRegistationYear() {
+    public Year getRegistrationYear() {
         return registrationYear;
     }
 
-    public void setRegistationYear(Year registationYear) {
-        this.registrationYear = registationYear;
+    public void setRegistrationYear(Year registrationYear) {
+        this.registrationYear = registrationYear;
     }
 
     public String getFullType() {

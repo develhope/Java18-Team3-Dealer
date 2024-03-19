@@ -123,7 +123,7 @@ public class VehicleService {
         vehicle.setColor(updateVehicle.getColor());
         vehicle.setPower(updateVehicle.getPower());
         vehicle.setTransmission(updateVehicle.getTransmission());
-        vehicle.setRegistationYear(updateVehicle.getRegistationYear());
+        vehicle.setRegistrationYear(updateVehicle.getRegistrationYear());
         vehicle.setFullType(updateVehicle.getFullType());
         vehicle.setPrice(updateVehicle.getPrice());
         vehicle.setDiscount(updateVehicle.getDiscount());
@@ -167,7 +167,7 @@ public class VehicleService {
         vehicle.setColor(vehicleDTO.getColor());
         vehicle.setPower(vehicleDTO.getPower());
         vehicle.setTransmission(vehicleDTO.getTransmission());
-        vehicle.setRegistationYear(Year.of(vehicleDTO.getRegistationYear()));
+        vehicle.setRegistrationYear(Year.of(vehicleDTO.getRegistrationYear()));
         vehicle.setFullType(vehicleDTO.getFullType());
         vehicle.setPrice(vehicleDTO.getPrice());
         vehicle.setDiscount(vehicleDTO.getDiscount());
@@ -186,7 +186,7 @@ public class VehicleService {
         vehicleDTO.setColor(vehicle.getColor());
         vehicleDTO.setPower(vehicle.getPower());
         vehicleDTO.setTransmission(vehicle.getTransmission());
-        vehicleDTO.setRegistationYear(vehicle.getRegistationYear().getValue());
+        vehicleDTO.setRegistrationYear(vehicle.getRegistrationYear().getValue());
         vehicleDTO.setFullType(vehicle.getFullType());
         vehicleDTO.setPrice(vehicle.getPrice());
         vehicleDTO.setDiscount(vehicle.getDiscount());
