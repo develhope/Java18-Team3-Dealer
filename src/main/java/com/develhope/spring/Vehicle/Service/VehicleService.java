@@ -4,6 +4,7 @@ import com.develhope.spring.Vehicle.Dto.VehicleDTO;
 import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
+import com.develhope.spring.Vehicle.Entity.VehicleType;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,9 +19,10 @@ public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
 
-    public Vehicle createVehicle(VehicleDTO vehicleDTO) {
+    public VehicleDTO createVehicle(VehicleDTO vehicleDTO) {
         Vehicle vehicle = convertToEntity(vehicleDTO);
-        return vehicleRepository.save(vehicle);
+        vehicleRepository.save(vehicle);
+        return vehicleDTO;
     }
 
     public VehicleDTO getVehicleById(Long vehicleId) {
@@ -29,6 +31,20 @@ public class VehicleService {
             throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
         }
         return convertToDTO(vehicle);
+    }
+
+    public List<VehicleDTO> getAllVehicle() {
+        List<Vehicle> vehicleList = vehicleRepository.findAll();
+        List<VehicleDTO> vehicleDTOList = new ArrayList<>();
+        if (vehicleList.isEmpty()) {
+            throw new IllegalArgumentException("No vehicle found");
+        }
+        else {
+            for (Vehicle vehicle : vehicleList) {
+                vehicleDTOList.add(convertToDTO(vehicle));
+            }
+        }
+        return vehicleDTOList;
     }
 
     public List<VehicleDTO> getVehicleByPrice(BigDecimal minPrice, BigDecimal maxPrice) { //dare valori default in controller
@@ -79,7 +95,23 @@ public class VehicleService {
         return vehicleDTOList;
     }
 
-    public Vehicle updateVehicle(Long vehicleId, VehicleDTO updateVehicleDTO) {
+    public List<VehicleDTO> getVehicleByType(VehicleType vehicleType) {
+        List<VehicleDTO> vehicleDTOList = new ArrayList<>();
+        if (vehicleType == VehicleType.CAR
+                || vehicleType == VehicleType.MOTORBIKE
+                || vehicleType == VehicleType.SCOOTER
+                || vehicleType == VehicleType.VAN) {
+            List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByType(vehicleType);
+            for (Vehicle vehicle : vehicleList) {
+                vehicleDTOList.add(convertToDTO(vehicle));
+            }
+        } else {
+            throw new IllegalArgumentException("Type not valid: " + vehicleType);
+        }
+        return vehicleDTOList;
+    }
+
+    public VehicleDTO updateVehicle(Long vehicleId, VehicleDTO updateVehicleDTO) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) {
             throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
@@ -99,10 +131,11 @@ public class VehicleService {
         vehicle.setNew(updateVehicle.getNew());
         vehicle.setVehicleStatus(updateVehicle.getVehicleStatus());
         vehicle.setVehicleType(updateVehicle.getVehicleType());
-        return vehicleRepository.save(vehicle);
+        vehicleRepository.save(vehicle);
+        return updateVehicleDTO;
     }
 
-    public Vehicle chanceStatus(Long vehicleId, VehicleStatusDTO vehicleStatusDTO) {
+    public VehicleDTO chanceStatus(Long vehicleId, VehicleStatusDTO vehicleStatusDTO) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) {
             throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
@@ -111,13 +144,14 @@ public class VehicleService {
                 || vehicleStatusDTO.getVehicleStatus() == VehicleStatus.PURCHASABLE
                 || vehicleStatusDTO.getVehicleStatus() == VehicleStatus.NOT_AVAILABLE) {
             vehicle.setVehicleStatus(vehicleStatusDTO.getVehicleStatus());
-            return vehicleRepository.save(vehicle);
+            vehicleRepository.save(vehicle);
+            return convertToDTO(vehicle);
         } else {
             throw new IllegalArgumentException("Status not valid: " + vehicleStatusDTO.getVehicleStatus());
         }
     }
 
-    public void deleteVehicleById(Long vehicleId) {
+    public void deleteVehicle(Long vehicleId) {
         Vehicle vehicle = vehicleRepository.findById(vehicleId).orElse(null);
         if (vehicle == null) {
             throw new IllegalArgumentException("Vehicle with this id not found: " + vehicleId);
