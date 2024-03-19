@@ -17,7 +17,7 @@ public class Purchase {
     private Boolean isPaid;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private PurchaseStatus orderStatus;
+    private PurchaseStatus purchaseStatus;
     @OneToOne
     @JoinColumn(name = "purchaseId", referencedColumnName = "vehicleId")
     private Vehicle vehicle;
@@ -49,12 +49,12 @@ public class Purchase {
         isPaid = paid;
     }
 
-    public PurchaseStatus getOrderStatus() {
-        return orderStatus;
+    public PurchaseStatus getPurchaseStatus() {
+        return purchaseStatus;
     }
 
-    public void setOrderStatus(PurchaseStatus orderStatus) {
-        this.orderStatus = orderStatus;
+    public void setPurchaseStatus(PurchaseStatus purchaseStatus) {
+        this.purchaseStatus = purchaseStatus;
     }
 
     public Vehicle getVehicle() {
@@ -73,11 +73,11 @@ public class Purchase {
         this.buyer = buyer;
     }
 
-    public Purchase(Long purchaseId, double advance, Boolean isPaid, PurchaseStatus orderStatus, Vehicle vehicle, Buyer buyer) {
+    public Purchase(Long purchaseId, double advance, Boolean isPaid, PurchaseStatus purchaseStatus, Vehicle vehicle, Buyer buyer) {
         this.purchaseId = purchaseId;
         this.advance = advance;
         this.isPaid = isPaid;
-        this.orderStatus = orderStatus;
+        this.purchaseStatus = purchaseStatus;
         this.vehicle = vehicle;
         this.buyer = buyer;
     }
@@ -91,7 +91,7 @@ public class Purchase {
                 "purchaseId=" + purchaseId +
                 ", advance=" + advance +
                 ", isPaid=" + isPaid +
-                ", orderStatus=" + orderStatus +
+                ", purchaseStatus=" + purchaseStatus +
                 ", vehicle=" + vehicle +
                 ", buyer=" + buyer +
                 '}';
