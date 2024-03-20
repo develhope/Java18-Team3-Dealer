@@ -1,8 +1,10 @@
 package com.develhope.spring.Purchase.Service;
 
 
+import com.develhope.spring.Buyer.Entity.Buyer;
 import com.develhope.spring.Purchase.Entity.Purchase;
 import com.develhope.spring.Purchase.Repository.PurchaseRepository;
+import com.develhope.spring.Purchase.dto.PurchaseDTO;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +57,25 @@ public class PurchaseService {
             student.get().setPaid(isPaid);
             return purchaseRepository.saveAndFlush(student.get());
         } else return null;
+    }
+
+    private Purchase convertToEntity(PurchaseDTO purchaseDTO) {
+        Purchase purchase = new Purchase();
+        purchase.setAdvance(purchaseDTO.getAdvance());
+        purchase.setPaid(purchaseDTO.getPaid());
+        purchase.setPurchaseStatus(purchaseDTO.getPurchaseStatus());
+        purchase.setVehicle(purchaseDTO.getVehicle());
+        purchase.setBuyer(purchaseDTO.getBuyer());
+        return purchase;
+    }
+
+    private PurchaseDTO convertToDTO(Purchase purchase) {
+        PurchaseDTO PurchaseDTO = new PurchaseDTO();
+        PurchaseDTO.setAdvance(purchase.getAdvance());
+        PurchaseDTO.setPaid(purchase.getPaid());
+        PurchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
+        PurchaseDTO.setVehicle(purchase.getVehicle());
+        PurchaseDTO.setBuyer(purchase.getBuyer());
+        return PurchaseDTO;
     }
 }
