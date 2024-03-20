@@ -42,7 +42,7 @@ public class VehicleController {
 
     @Operation(summary = "Get vehicles by price")
     @GetMapping("/byPrice")
-    public ResponseEntity<List<VehicleDTO>> getVehicleByPrice (@RequestParam BigDecimal minPrice, @RequestParam BigDecimal maxPrice) {
+    public ResponseEntity<List<VehicleDTO>> getVehicleByPrice (@RequestParam(defaultValue = "0") BigDecimal minPrice, @RequestParam(defaultValue = "1000000000000") BigDecimal maxPrice) {
         return new ResponseEntity<>(vehicleService.getVehicleByPrice(minPrice, maxPrice), HttpStatus.OK);
     }
 

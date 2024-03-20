@@ -101,7 +101,7 @@ public class VehicleService {
                 || vehicleType == VehicleType.MOTORBIKE
                 || vehicleType == VehicleType.SCOOTER
                 || vehicleType == VehicleType.VAN) {
-            List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByType(vehicleType);
+            List<Vehicle> vehicleList = vehicleRepository.getAllVehicleByType(vehicleType.toString());
             for (Vehicle vehicle : vehicleList) {
                 vehicleDTOList.add(convertToDTO(vehicle));
             }
