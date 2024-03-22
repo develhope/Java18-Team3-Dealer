@@ -5,7 +5,6 @@ import com.develhope.spring.Purchase.Entity.Purchase;
 import com.develhope.spring.Purchase.Repository.PurchaseRepository;
 import com.develhope.spring.Purchase.dto.PurchaseDTO;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
-import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
