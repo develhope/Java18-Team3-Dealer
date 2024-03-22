@@ -1,7 +1,6 @@
 package com.develhope.spring.Purchase.Service;
 
 
-import com.develhope.spring.Buyer.Entity.Buyer;
 import com.develhope.spring.Purchase.Entity.Purchase;
 import com.develhope.spring.Purchase.Repository.PurchaseRepository;
 import com.develhope.spring.Purchase.dto.PurchaseDTO;
@@ -10,6 +9,7 @@ import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,19 +17,29 @@ import java.util.Optional;
 public class PurchaseService {
     @Autowired
     PurchaseRepository purchaseRepository;
-    @Autowired
-    VehicleRepository vehicleRepository;
 
-    public List<Purchase> purchaseList(Purchase purchase) {
-        return purchaseRepository.findAll();
+
+    public List<PurchaseDTO> purchaseList() {
+        List<Purchase> purchaseList = purchaseRepository.findAll() ;
+        List<PurchaseDTO> purchaseDTOList = new ArrayList<>();
+        if (purchaseList.isEmpty()){
+            throw new IllegalArgumentException("Purchase not found");
+        } else{
+            for(Purchase purchase : purchaseList){
+                purchaseDTOList.add(convertToDTO(purchase));
+            }
+        }
+        return purchaseDTOList;
     }
 
-    public Purchase purchasableOrder(Purchase purchase) {
-        if (purchase.getVehicle() != null && purchase.getVehicle().getVehicleStatus() == VehicleStatus.PURCHASABLE) {
-            purchaseRepository.save(purchase);
-            return purchase;
+    public PurchaseDTO purchasableOrder(PurchaseDTO purchaseDTO) {
+        Purchase purchaseDto = convertToEntity(purchaseDTO);
+        if (purchaseDto.getVehicle() != null && purchaseDto.getVehicle().getVehicleStatus() == VehicleStatus.PURCHASABLE) {
+            purchaseRepository.save(convertToEntity(purchaseDTO));
+            return purchaseDTO;
+        } else{
+            throw new IllegalArgumentException("Vehicle status not found");
         }
-        return null;
     }
 
     public void deletePurchase(Long purchaseId) {
@@ -40,15 +50,17 @@ public class PurchaseService {
         return purchaseRepository.save(purchase);
     }
 
-    public Purchase updatePurchase(Long purchaseId, Purchase purchase) {
+    public PurchaseDTO updatePurchase(Long purchaseId, PurchaseDTO upPurchaseDTO) {
         Purchase savePurchase = purchaseRepository.findById(purchaseId).orElse(null);
-        if (savePurchase != null) {
-            savePurchase.setPaid(purchase.getPaid());
-            savePurchase.setAdvance(purchase.getAdvance());
-            savePurchase.setPurchaseStatus(purchase.getPurchaseStatus());
-            return purchaseRepository.save(savePurchase);
-        }
-        return null;
+       if(savePurchase == null){
+           throw new IllegalArgumentException("Purchase not found by ID : " + purchaseId);
+       }
+         Purchase savePurchaseDTO = convertToEntity(upPurchaseDTO);
+       savePurchase.setPaid(savePurchaseDTO.getPaid());
+       savePurchase.setAdvance(savePurchaseDTO.getAdvance());
+       savePurchase.setPurchaseStatus(savePurchaseDTO.getPurchaseStatus());
+       purchaseRepository.save(savePurchase);
+       return upPurchaseDTO;
     }
 
     public Purchase setPurchaseStatus(Long purchaseId, Boolean isPaid) {
@@ -56,7 +68,9 @@ public class PurchaseService {
         if (student.isPresent()) {
             student.get().setPaid(isPaid);
             return purchaseRepository.saveAndFlush(student.get());
-        } else return null;
+        } else{
+            throw new IllegalArgumentException("Error");
+        }
     }
 
     private Purchase convertToEntity(PurchaseDTO purchaseDTO) {
