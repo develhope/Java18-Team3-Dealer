@@ -105,4 +105,14 @@ public class Orders {
                 ", vehicle=" + vehicle +
                 '}';
     }
+
+    private Double orderValue;
+
+    public Double getOrderValue() {
+        return orderValue;
+    }
+
+    public void setOrderValue(Double orderValue) {
+        this.orderValue = orderValue;
+    }
 }

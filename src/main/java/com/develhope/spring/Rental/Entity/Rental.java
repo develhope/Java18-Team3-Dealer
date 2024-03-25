@@ -4,6 +4,7 @@ import com.develhope.spring.Buyer.Entity.Buyer;
 import com.develhope.spring.Seller.ENTITY.SellerEntity;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
+import java.util.NoSuchElementException;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -143,6 +144,15 @@ public class Rental {
                 ", sellerEntity=" + sellerEntity +
                 ", vehicle=" + vehicle +
                 '}';
+    }
+    private Long buyerId;
+
+    public Long getBuyerId() {
+        return buyerId;
+    }
+
+    public void setBuyerId(Long buyerId) {
+        this.buyerId = buyerId;
     }
 }
 

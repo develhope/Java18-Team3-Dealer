@@ -83,5 +83,12 @@ public class Purchase {
                 ", orders=" + orders +
                 '}';
     }
+
+    public void setBuyer(Buyer buyer) {
+    }
+
+    public Object getBuyerId() {
+        return getBuyerId();
+    }
 }
 

@@ -1,6 +1,6 @@
 package com.develhope.spring.Admin.Entity;
 import jakarta.persistence.*;
-@Table
+@Table(name = "admin")
 @Entity
 public class Admin {
     @Id
