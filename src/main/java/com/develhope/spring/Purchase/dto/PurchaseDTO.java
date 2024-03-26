@@ -1,36 +1,24 @@
 package com.develhope.spring.Purchase.dto;
 
-import com.develhope.spring.Buyer.Entity.Buyer;
+import com.develhope.spring.Order.Entity.Orders;
 import com.develhope.spring.Purchase.Entity.PurchaseStatus;
+import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
 public class PurchaseDTO {
-    private Long purchaseId;
     private double advance;
     private Boolean isPaid;
     private PurchaseStatus purchaseStatus;
-    private Vehicle vehicle;
-    private Buyer buyer;
-    public PurchaseDTO(Long purchaseId, double advance, Boolean isPaid, PurchaseStatus purchaseStatus, Vehicle vehicle, Buyer buyer) {
-        this.purchaseId = purchaseId;
+    private Orders orders;
+
+    public PurchaseDTO(double advance, Boolean isPaid, PurchaseStatus purchaseStatus,Orders orders) {
         this.advance = advance;
         this.isPaid = isPaid;
         this.purchaseStatus = purchaseStatus;
-        this.vehicle = vehicle;
-        this.buyer = buyer;
+        this.orders = orders;
     }
 
-    public PurchaseDTO() {
-    }
-
-    public Long getPurchaseId() {
-        return purchaseId;
-    }
-
-    public void setPurchaseId(Long purchaseId) {
-        this.purchaseId = purchaseId;
-    }
 
     public double getAdvance() {
         return advance;
@@ -56,31 +44,24 @@ public class PurchaseDTO {
         this.purchaseStatus = purchaseStatus;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 
-    public Buyer getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
+    public PurchaseDTO() {
     }
 
     @Override
     public String toString() {
         return "PurchaseDTO{" +
-                "purchaseId=" + purchaseId +
                 ", advance=" + advance +
                 ", isPaid=" + isPaid +
                 ", purchaseStatus=" + purchaseStatus +
-                ", vehicle=" + vehicle +
-                ", buyer=" + buyer +
+                ", orders=" + orders +
                 '}';
     }
 }

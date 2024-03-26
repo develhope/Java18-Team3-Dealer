@@ -33,7 +33,7 @@ public class PurchaseService {
 
     public PurchaseDTO purchasableOrder(PurchaseDTO purchaseDTO) {
         Purchase purchaseDto = convertToEntity(purchaseDTO);
-        if (purchaseDto.getVehicle() != null && purchaseDto.getVehicle().getVehicleStatus() == VehicleStatus.PURCHASABLE) {
+        if (purchaseDTO.getOrders().getVehicle() != null && purchaseDTO.getOrders().getVehicle().getVehicleStatus() == VehicleStatus.PURCHASABLE) {
             purchaseRepository.save(convertToEntity(purchaseDTO));
             return purchaseDTO;
         } else{
@@ -77,18 +77,16 @@ public class PurchaseService {
         purchase.setAdvance(purchaseDTO.getAdvance());
         purchase.setPaid(purchaseDTO.getPaid());
         purchase.setPurchaseStatus(purchaseDTO.getPurchaseStatus());
-        purchase.setVehicle(purchaseDTO.getVehicle());
-        purchase.setBuyer(purchaseDTO.getBuyer());
+        purchase.setOrders(purchaseDTO.getOrders());
         return purchase;
     }
 
     private PurchaseDTO convertToDTO(Purchase purchase) {
-        PurchaseDTO PurchaseDTO = new PurchaseDTO();
-        PurchaseDTO.setAdvance(purchase.getAdvance());
-        PurchaseDTO.setPaid(purchase.getPaid());
-        PurchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
-        PurchaseDTO.setVehicle(purchase.getVehicle());
-        PurchaseDTO.setBuyer(purchase.getBuyer());
-        return PurchaseDTO;
+        PurchaseDTO purchaseDTO = new PurchaseDTO();
+        purchaseDTO.setAdvance(purchase.getAdvance());
+        purchaseDTO.setPaid(purchase.getPaid());
+        purchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
+        purchaseDTO.setOrders(purchase.getOrders());
+        return purchaseDTO;
     }
 }
