@@ -64,11 +64,11 @@ public class Vehicle {
     public Vehicle() {
     }
 
-    public Long getVehicleIdId() {
+    public Long getVehicleId() {
         return vehicleId;
     }
 
-    public void setVehicleIdId(Long id) {
+    public void setVehicleId(Long id) {
         this.vehicleId = id;
     }
 
@@ -160,12 +160,12 @@ public class Vehicle {
         this.accessories = accessories;
     }
 
-    public Boolean getNew() {
+    public Boolean getIsNew() {
         return isNew;
     }
 
-    public void setNew(Boolean aNew) {
-        isNew = aNew;
+    public void setIsNew(Boolean isNew) {
+        this.isNew = isNew;
     }
 
     public VehicleStatus getVehicleStatus() {
