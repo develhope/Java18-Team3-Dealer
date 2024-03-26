@@ -1,8 +1,6 @@
 package com.develhope.spring.Purchase.Entity;
 
-import com.develhope.spring.Buyer.Entity.Buyer;
 import com.develhope.spring.Order.Entity.Orders;
-import com.develhope.spring.Seller.ENTITY.SellerEntity;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 

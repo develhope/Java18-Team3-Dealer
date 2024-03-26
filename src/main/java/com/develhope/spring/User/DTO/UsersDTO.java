@@ -1,18 +1,22 @@
 package com.develhope.spring.User.DTO;
 
+import com.develhope.spring.User.Entity.Role;
+
 public class UsersDTO {
     private String firstName;
     private String lastName;
     private String telephoneNumber;
     private String email;
     private String password;
+    private Role role;
 
-    public UsersDTO(String firstName, String lastName, String telephoneNumber, String email, String password) {
+    public UsersDTO(String firstName, String lastName, String telephoneNumber, String email, String password, Role role) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.password = password;
+        this.role = role;
     }
 
     public UsersDTO() {
@@ -58,6 +62,14 @@ public class UsersDTO {
         this.password = password;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "UsersDTO{" +
@@ -66,6 +78,7 @@ public class UsersDTO {
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
                 '}';
     }
 }
