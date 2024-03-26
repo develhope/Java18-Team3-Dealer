@@ -1,29 +1,21 @@
-package com.develhope.spring.Buyer.Entity;
+package com.develhope.spring.User.DTO;
 
-import jakarta.persistence.*;
-@Table
-@Entity
-public class Buyer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long buyer_id;
-    @Column(nullable = false, name = "Nome")
+public class UsersDTO {
     private String firstName;
-    @Column(nullable = false, name = "Cognome")
     private String lastName;
-    @Column(nullable = false, name = "Numero di telefono")
     private String telephoneNumber;
-    @Column(unique = true, name = "Indirizzo email")
     private String email;
-    @Column(nullable = false, length = 10)
     private String password;
 
-    public Long getBuyer_id() {
-        return buyer_id;
+    public UsersDTO(String firstName, String lastName, String telephoneNumber, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.password = password;
     }
 
-    public void setBuyer_id(Long buyer_id) {
-        this.buyer_id = buyer_id;
+    public UsersDTO() {
     }
 
     public String getFirstName() {
@@ -66,23 +58,10 @@ public class Buyer {
         this.password = password;
     }
 
-    public Buyer(Long buyer_id, String firstName, String lastName, String telephoneNumber, String email, String password) {
-        this.buyer_id = buyer_id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.telephoneNumber = telephoneNumber;
-        this.email = email;
-        this.password = password;
-    }
-
-    public Buyer() {
-    }
-
     @Override
     public String toString() {
-        return "Buyer{" +
-                "buyer_id=" + buyer_id +
-                ", firstName='" + firstName + '\'' +
+        return "UsersDTO{" +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +

@@ -17,24 +17,21 @@ public class Orders {
     private Boolean isPaid;
     @Column(nullable = false)
     private OrderStatus orderStatus;
-    @OneToOne
-    @JoinColumn(name = "orderId", referencedColumnName = "vehicleId")
-    private Vehicle vehicle;
-    @OneToOne
-    @JoinColumn (name = "orderId", referencedColumnName = "buyer_id")
+    @ManyToOne
     private Buyer buyer;
-    @OneToOne
-    @JoinColumn (name = "orderId", referencedColumnName = "sellerId")
+    @ManyToOne
     private SellerEntity sellerEntity;
+    @OneToOne
+    private Vehicle vehicle;
 
-    public Orders(Long orderId, Double advance, Boolean isPaid, OrderStatus orderStatus, Vehicle vehicle, Buyer buyer, SellerEntity sellerEntity) {
+    public Orders(Long orderId, Double advance, Boolean isPaid, OrderStatus orderStatus, Buyer buyer, SellerEntity sellerEntity, Vehicle vehicle) {
         this.orderId = orderId;
         this.advance = advance;
         this.isPaid = isPaid;
         this.orderStatus = orderStatus;
-        this.vehicle = vehicle;
         this.buyer = buyer;
         this.sellerEntity = sellerEntity;
+        this.vehicle = vehicle;
     }
 
     public Orders() {
@@ -48,7 +45,7 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public double getAdvance() {
+    public Double getAdvance() {
         return advance;
     }
 
@@ -72,14 +69,6 @@ public class Orders {
         this.orderStatus = orderStatus;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
-    }
-
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
     public Buyer getBuyer() {
         return buyer;
     }
@@ -96,6 +85,14 @@ public class Orders {
         this.sellerEntity = sellerEntity;
     }
 
+    public Vehicle getVehicle() {
+        return vehicle;
+    }
+
+    public void setVehicle(Vehicle vehicle) {
+        this.vehicle = vehicle;
+    }
+
     @Override
     public String toString() {
         return "Orders{" +
@@ -103,9 +100,9 @@ public class Orders {
                 ", advance=" + advance +
                 ", isPaid=" + isPaid +
                 ", orderStatus=" + orderStatus +
-                ", vehicle=" + vehicle +
                 ", buyer=" + buyer +
                 ", sellerEntity=" + sellerEntity +
+                ", vehicle=" + vehicle +
                 '}';
     }
 }

@@ -1,6 +1,7 @@
 package com.develhope.spring.Purchase.Entity;
 
 import com.develhope.spring.Buyer.Entity.Buyer;
+import com.develhope.spring.Order.Entity.Orders;
 import com.develhope.spring.Seller.ENTITY.SellerEntity;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
@@ -17,13 +18,20 @@ public class Purchase {
     private Boolean isPaid;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private PurchaseStatus purchaseStatus;
+    private PurchaseStatus orderStatus;
     @OneToOne
-    @JoinColumn(name = "purchaseId", referencedColumnName = "vehicleId")
-    private Vehicle vehicle;
-    @OneToOne
-    @JoinColumn(name = "purchaseId", referencedColumnName = "buyer_id")
-    private Buyer buyer;
+    private Orders orders;
+
+    public Purchase(Long purchaseId, double advance, Boolean isPaid, PurchaseStatus orderStatus, Orders orders) {
+        this.purchaseId = purchaseId;
+        this.advance = advance;
+        this.isPaid = isPaid;
+        this.orderStatus = orderStatus;
+        this.orders = orders;
+    }
+
+    public Purchase() {
+    }
 
     public Long getPurchaseId() {
         return purchaseId;
@@ -49,40 +57,20 @@ public class Purchase {
         isPaid = paid;
     }
 
-    public PurchaseStatus getPurchaseStatus() {
-        return purchaseStatus;
+    public PurchaseStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setPurchaseStatus(PurchaseStatus purchaseStatus) {
-        this.purchaseStatus = purchaseStatus;
+    public void setOrderStatus(PurchaseStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
-    public Vehicle getVehicle() {
-        return vehicle;
+    public Orders getOrders() {
+        return orders;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
-    }
-
-    public Buyer getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
-    }
-
-    public Purchase(Long purchaseId, double advance, Boolean isPaid, PurchaseStatus purchaseStatus, Vehicle vehicle, Buyer buyer) {
-        this.purchaseId = purchaseId;
-        this.advance = advance;
-        this.isPaid = isPaid;
-        this.purchaseStatus = purchaseStatus;
-        this.vehicle = vehicle;
-        this.buyer = buyer;
-    }
-
-    public Purchase() {
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 
     @Override
@@ -91,9 +79,8 @@ public class Purchase {
                 "purchaseId=" + purchaseId +
                 ", advance=" + advance +
                 ", isPaid=" + isPaid +
-                ", purchaseStatus=" + purchaseStatus +
-                ", vehicle=" + vehicle +
-                ", buyer=" + buyer +
+                ", orderStatus=" + orderStatus +
+                ", orders=" + orders +
                 '}';
     }
 }
