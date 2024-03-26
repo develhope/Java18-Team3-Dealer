@@ -14,7 +14,7 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query(value = "SELECT * FROM VEHICLE WHERE COLOR = ?1", nativeQuery = true)
     List<Vehicle> getAllVehicleByColor(String color);
 
-    @Query(value = "SELECT * FROM VEHICLE WHERE PRICE > ?1 OR PRICE < ?2", nativeQuery = true)
+    @Query(value = "SELECT * FROM VEHICLE WHERE PRICE >= ?1 OR PRICE <= ?2", nativeQuery = true)
     List<Vehicle> getAllVehicleByPrice(BigDecimal minPrice, BigDecimal maxPrice);
 
     @Query(value = "SELECT * FROM VEHICLE WHERE BRAND = ?1", nativeQuery = true)
@@ -23,6 +23,6 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     @Query(value = "SELECT * FROM VEHICLE WHERE MODEL = ?1", nativeQuery = true)
     List<Vehicle> getAllVehicleByModel(String model);
 
-    @Query(value = "SELECT * FROM VEHICLE WHERE vehicleType = ?1", nativeQuery = true)
-    List<Vehicle> getAllVehicleByType (VehicleType vehicleType);
+    @Query(value = "SELECT * FROM VEHICLE WHERE vehicle_Type = ?1", nativeQuery = true)
+    List<Vehicle> getAllVehicleByType (String vehicleType);
 }

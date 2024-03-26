@@ -1,12 +1,22 @@
-package com.develhope.spring.Buyer.DTO;
+package com.develhope.spring.User.DTO;
 
-
-public class BuyerDTO {
+public class UsersDTO {
     private String firstName;
     private String lastName;
     private String telephoneNumber;
     private String email;
     private String password;
+
+    public UsersDTO(String firstName, String lastName, String telephoneNumber, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.telephoneNumber = telephoneNumber;
+        this.email = email;
+        this.password = password;
+    }
+
+    public UsersDTO() {
+    }
 
     public String getFirstName() {
         return firstName;
@@ -48,21 +58,10 @@ public class BuyerDTO {
         this.password = password;
     }
 
-    public BuyerDTO(Long buyer_id, String firstName, String lastName, String telephoneNumber, String email, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.telephoneNumber = telephoneNumber;
-        this.email = email;
-        this.password = password;
-    }
-
-    public BuyerDTO() {
-    }
-
     @Override
     public String toString() {
-        return "BuyerDTO{" +
-                ", firstName='" + firstName + '\'' +
+        return "UsersDTO{" +
+                "firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +

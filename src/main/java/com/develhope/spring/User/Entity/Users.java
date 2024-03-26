@@ -1,4 +1,4 @@
-package com.develhope.spring.Buyer.Entity;
+package com.develhope.spring.User.Entity;
 
 import com.develhope.spring.Order.Entity.Orders;
 import com.develhope.spring.Purchase.Entity.Purchase;
@@ -7,12 +7,10 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
-@Table
-@Entity
-public class Buyer {
+public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long buyerId;
+    private Long userId;
     @Column(nullable = false, name = "Nome")
     private String firstName;
     @Column(nullable = false, name = "Cognome")
@@ -30,8 +28,8 @@ public class Buyer {
     @OneToMany
     private List<Rental> rentalList;
 
-    public Buyer(Long buyerId, String firstName, String lastName, String telephoneNumber, String email, String password, List<Orders> ordersList, List<Purchase> purchaseList, List<Rental> rentalList) {
-        this.buyerId = buyerId;
+    public Users(Long userId, String firstName, String lastName, String telephoneNumber, String email, String password, List<Orders> ordersList, List<Purchase> purchaseList, List<Rental> rentalList) {
+        this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephoneNumber = telephoneNumber;
@@ -42,15 +40,15 @@ public class Buyer {
         this.rentalList = rentalList;
     }
 
-    public Buyer() {
+    public Users() {
     }
 
-    public Long getBuyerId() {
-        return buyerId;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setBuyerId(Long buyerId) {
-        this.buyerId = buyerId;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getFirstName() {
@@ -119,8 +117,8 @@ public class Buyer {
 
     @Override
     public String toString() {
-        return "Buyer{" +
-                "buyerId=" + buyerId +
+        return "Users{" +
+                "userId=" + userId +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", telephoneNumber='" + telephoneNumber + '\'' +
