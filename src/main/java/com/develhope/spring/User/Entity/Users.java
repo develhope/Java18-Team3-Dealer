@@ -1,8 +1,5 @@
 package com.develhope.spring.User.Entity;
 
-import com.develhope.spring.Order.Entity.Orders;
-import com.develhope.spring.Purchase.Entity.Purchase;
-import com.develhope.spring.Rental.Entity.Rental;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,7 +24,7 @@ public class Users implements UserDetails {
     @Column(nullable = false, name = "Cognome")
     private String lastName;
     @Column(nullable = false, name = "Numero di telefono")
-    private String telephoneNumber;
+    private Integer telephoneNumber;
     @Column(unique = true, name = "Indirizzo email")
     private String email;
     @Column(nullable = false)
@@ -35,12 +32,6 @@ public class Users implements UserDetails {
     @Column
     @Enumerated(EnumType.STRING)
     private Role role;
-//    @OneToMany
-//    private List<Orders> ordersList;
-//    @OneToMany
-//    private List<Purchase> purchaseList;
-//    @OneToMany
-//    private List<Rental> rentalList;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
