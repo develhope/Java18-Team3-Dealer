@@ -53,6 +53,7 @@ public class UserService {
         users.setEmail(usersDTO.getEmail());
         users.setPassword(usersDTO.getPassword());
         users.setTelephoneNumber(usersDTO.getTelephoneNumber());
+        users.setRole(usersDTO.getRole());
         return users;
     }
 
@@ -63,6 +64,7 @@ public class UserService {
         usersDTO.setEmail(users.getEmail());
         usersDTO.setPassword(users.getEmail());
         usersDTO.setTelephoneNumber(users.getTelephoneNumber());
+        usersDTO.setRole(users.getRole());
         return usersDTO;
     }
 }

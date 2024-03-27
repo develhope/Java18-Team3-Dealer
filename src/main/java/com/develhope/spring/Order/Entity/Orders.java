@@ -1,6 +1,6 @@
 package com.develhope.spring.Order.Entity;
 
-
+import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
@@ -17,19 +17,17 @@ public class Orders {
     @Column(nullable = false)
     private OrderStatus orderStatus;
     @ManyToOne
-    private Buyer buyer;
-    @ManyToOne
-    private SellerEntity sellerEntity;
+    private Users users;
     @OneToOne
     private Vehicle vehicle;
 
-    public Orders(Long orderId, Double advance, Boolean isPaid, OrderStatus orderStatus, Buyer buyer, SellerEntity sellerEntity, Vehicle vehicle) {
+
+    public Orders(Long orderId, Double advance, Boolean isPaid, OrderStatus orderStatus, Users users, Vehicle vehicle) {
         this.orderId = orderId;
         this.advance = advance;
         this.isPaid = isPaid;
         this.orderStatus = orderStatus;
-        this.buyer = buyer;
-        this.sellerEntity = sellerEntity;
+        this.users = users;
         this.vehicle = vehicle;
     }
 
@@ -68,20 +66,12 @@ public class Orders {
         this.orderStatus = orderStatus;
     }
 
-    public Buyer getBuyer() {
-        return buyer;
+    public Users getUsers() {
+        return users;
     }
 
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
-    }
-
-    public SellerEntity getSellerEntity() {
-        return sellerEntity;
-    }
-
-    public void setSellerEntity(SellerEntity sellerEntity) {
-        this.sellerEntity = sellerEntity;
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
     public Vehicle getVehicle() {
@@ -99,8 +89,7 @@ public class Orders {
                 ", advance=" + advance +
                 ", isPaid=" + isPaid +
                 ", orderStatus=" + orderStatus +
-                ", buyer=" + buyer +
-                ", sellerEntity=" + sellerEntity +
+                ", users=" + users +
                 ", vehicle=" + vehicle +
                 '}';
     }

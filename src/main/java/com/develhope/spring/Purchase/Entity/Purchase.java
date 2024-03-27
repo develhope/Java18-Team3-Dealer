@@ -1,7 +1,7 @@
 package com.develhope.spring.Purchase.Entity;
 
-
 import com.develhope.spring.Order.Entity.Orders;
+import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,15 +16,15 @@ public class Purchase {
     private Boolean isPaid;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private PurchaseStatus purchaseStatus;
+    private PurchaseStatus orderStatus;
     @OneToOne
     private Orders orders;
 
-    public Purchase(Long purchaseId, double advance, Boolean isPaid, PurchaseStatus purchaseStatus, Orders orders) {
+    public Purchase(Long purchaseId, double advance, Boolean isPaid, PurchaseStatus orderStatus, Orders orders) {
         this.purchaseId = purchaseId;
         this.advance = advance;
         this.isPaid = isPaid;
-        this.purchaseStatus = purchaseStatus;
+        this.orderStatus = orderStatus;
         this.orders = orders;
     }
 
@@ -55,12 +55,12 @@ public class Purchase {
         isPaid = paid;
     }
 
-    public PurchaseStatus getPurchaseStatus() {
-        return purchaseStatus;
+    public PurchaseStatus getOrderStatus() {
+        return orderStatus;
     }
 
-    public void setPurchaseStatus(PurchaseStatus purchaseStatus) {
-        this.purchaseStatus = purchaseStatus;
+    public void setOrderStatus(PurchaseStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 
     public Orders getOrders() {
@@ -77,7 +77,7 @@ public class Purchase {
                 "purchaseId=" + purchaseId +
                 ", advance=" + advance +
                 ", isPaid=" + isPaid +
-                ", purchaseStatus=" + purchaseStatus +
+                ", orderStatus=" + orderStatus +
                 ", orders=" + orders +
                 '}';
     }

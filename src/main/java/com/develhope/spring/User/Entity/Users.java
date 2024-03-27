@@ -6,7 +6,8 @@ import com.develhope.spring.Rental.Entity.Rental;
 import jakarta.persistence.*;
 
 import java.util.List;
-
+@Entity
+@Table
 public class Users {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,6 +22,9 @@ public class Users {
     private String email;
     @Column(nullable = false, length = 10)
     private String password;
+    @Column
+    @Enumerated(EnumType.STRING)
+    private Role role;
     @OneToMany
     private List<Orders> ordersList;
     @OneToMany
@@ -28,13 +32,14 @@ public class Users {
     @OneToMany
     private List<Rental> rentalList;
 
-    public Users(Long userId, String firstName, String lastName, String telephoneNumber, String email, String password, List<Orders> ordersList, List<Purchase> purchaseList, List<Rental> rentalList) {
+    public Users(Long userId, String firstName, String lastName, String telephoneNumber, String email, String password, List<Orders> ordersList, List<Purchase> purchaseList, List<Rental> rentalList, Role role) {
         this.userId = userId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.telephoneNumber = telephoneNumber;
         this.email = email;
         this.password = password;
+        this.role = role;
         this.ordersList = ordersList;
         this.purchaseList = purchaseList;
         this.rentalList = rentalList;
@@ -115,6 +120,14 @@ public class Users {
         this.rentalList = rentalList;
     }
 
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
@@ -124,6 +137,7 @@ public class Users {
                 ", telephoneNumber='" + telephoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role=" + role +
                 ", ordersList=" + ordersList +
                 ", purchaseList=" + purchaseList +
                 ", rentalList=" + rentalList +

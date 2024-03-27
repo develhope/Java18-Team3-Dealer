@@ -1,7 +1,6 @@
 package com.develhope.spring.Rental.Entity;
 
-import com.develhope.spring.Buyer.Entity.Buyer;
-import com.develhope.spring.Seller.ENTITY.SellerEntity;
+import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
@@ -27,13 +26,11 @@ public class Rental {
     @Enumerated(EnumType.STRING)
     private RentalStatus rentalStatus;
     @ManyToOne
-    private Buyer buyer;
-    @ManyToOne
-    private SellerEntity sellerEntity;
+    private Users users;
     @ManyToOne
     private Vehicle vehicle;
 
-    public Rental(Long rentalId, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus, Buyer buyer, SellerEntity sellerEntity, Vehicle vehicle) {
+    public Rental(Long rentalId, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus, Users users, Vehicle vehicle) {
         this.rentalId = rentalId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -41,8 +38,7 @@ public class Rental {
         this.totalCost = totalCost;
         this.paidFlag = paidFlag;
         this.rentalStatus = rentalStatus;
-        this.buyer = buyer;
-        this.sellerEntity = sellerEntity;
+        this.users = users;
         this.vehicle = vehicle;
     }
 
@@ -105,20 +101,12 @@ public class Rental {
         this.rentalStatus = rentalStatus;
     }
 
-    public Buyer getBuyer() {
-        return buyer;
+    public Users getUsers() {
+        return users;
     }
 
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
-    }
-
-    public SellerEntity getSellerEntity() {
-        return sellerEntity;
-    }
-
-    public void setSellerEntity(SellerEntity sellerEntity) {
-        this.sellerEntity = sellerEntity;
+    public void setUsers(Users users) {
+        this.users = users;
     }
 
     public Vehicle getVehicle() {
@@ -139,8 +127,7 @@ public class Rental {
                 ", totalCost=" + totalCost +
                 ", paidFlag=" + paidFlag +
                 ", rentalStatus=" + rentalStatus +
-                ", buyer=" + buyer +
-                ", sellerEntity=" + sellerEntity +
+                ", users=" + users +
                 ", vehicle=" + vehicle +
                 '}';
     }
