@@ -32,7 +32,6 @@ public class PurchaseService {
     }
 
     public PurchaseDTO purchasableOrder(PurchaseDTO purchaseDTO) {
-        Purchase purchaseDto = convertToEntity(purchaseDTO);
         if (purchaseDTO.getOrders().getVehicle() != null && purchaseDTO.getOrders().getVehicle().getVehicleStatus() == VehicleStatus.PURCHASABLE) {
             purchaseRepository.save(convertToEntity(purchaseDTO));
             return purchaseDTO;
@@ -63,10 +62,10 @@ public class PurchaseService {
     }
 
     public Purchase setPurchaseStatus(Long purchaseId, Boolean isPaid) {
-        Optional<Purchase> student = purchaseRepository.findById(purchaseId);
-        if (student.isPresent()) {
-            student.get().setPaid(isPaid);
-            return purchaseRepository.saveAndFlush(student.get());
+        Optional<Purchase> purchase = purchaseRepository.findById(purchaseId);
+        if (purchase.isPresent()) {
+            purchase.get().setPaid(isPaid);
+            return purchaseRepository.saveAndFlush(purchase.get());
         } else{
             throw new IllegalArgumentException("Error");
         }
