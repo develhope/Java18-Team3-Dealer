@@ -44,8 +44,7 @@ public class VehicleService {
         List<VehicleDTO> vehicleDTOList = new ArrayList<>();
         if (vehicleList.isEmpty()) {
             throw new IllegalArgumentException("No vehicle found");
-        }
-        else {
+        } else {
             for (Vehicle vehicle : vehicleList) {
                 vehicleDTOList.add(convertToDTO(vehicle));
             }
