@@ -9,9 +9,10 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     UsersRepository usersRepository;
-    public Users createUsers(UsersDTO usersDTO) {
+    public UsersDTO createUsers(UsersDTO usersDTO) {
         Users saveDTO = convertToEntity(usersDTO);
-        return usersRepository.save(saveDTO);
+        usersRepository.save(saveDTO);
+        return usersDTO;
     }
 
     public void deleteUsersByID(Long userId) {
