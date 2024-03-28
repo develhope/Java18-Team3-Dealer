@@ -7,7 +7,6 @@ import com.develhope.spring.Purchase.dto.PurchaseDTO;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -54,7 +53,7 @@ public class PurchaseService {
            throw new IllegalArgumentException("Purchase not found by ID : " + purchaseId);
        }
          Purchase savePurchaseDTO = convertToEntity(upPurchaseDTO);
-       savePurchase.setPaid(savePurchaseDTO.getPaid());
+       savePurchase.setIsPaid(savePurchaseDTO.getIsPaid());
        savePurchase.setAdvance(savePurchaseDTO.getAdvance());
        savePurchase.setPurchaseStatus(savePurchaseDTO.getPurchaseStatus());
        purchaseRepository.save(savePurchase);
@@ -64,7 +63,7 @@ public class PurchaseService {
     public Purchase setPurchaseStatus(Long purchaseId, Boolean isPaid) {
         Optional<Purchase> purchase = purchaseRepository.findById(purchaseId);
         if (purchase.isPresent()) {
-            purchase.get().setPaid(isPaid);
+            purchase.get().setIsPaid(isPaid);
             return purchaseRepository.saveAndFlush(purchase.get());
         } else{
             throw new IllegalArgumentException("Error");
@@ -74,7 +73,7 @@ public class PurchaseService {
     private Purchase convertToEntity(PurchaseDTO purchaseDTO) {
         Purchase purchase = new Purchase();
         purchase.setAdvance(purchaseDTO.getAdvance());
-        purchase.setPaid(purchaseDTO.getPaid());
+        purchase.setIsPaid(purchaseDTO.getIsPaid());
         purchase.setPurchaseStatus(purchaseDTO.getPurchaseStatus());
         purchase.setOrders(purchaseDTO.getOrders());
         return purchase;
@@ -83,7 +82,7 @@ public class PurchaseService {
     private PurchaseDTO convertToDTO(Purchase purchase) {
         PurchaseDTO purchaseDTO = new PurchaseDTO();
         purchaseDTO.setAdvance(purchase.getAdvance());
-        purchaseDTO.setPaid(purchase.getPaid());
+        purchaseDTO.setIsPaid(purchase.getIsPaid());
         purchaseDTO.setPurchaseStatus(purchase.getPurchaseStatus());
         purchaseDTO.setOrders(purchase.getOrders());
         return purchaseDTO;
