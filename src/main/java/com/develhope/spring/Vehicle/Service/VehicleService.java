@@ -1,5 +1,7 @@
 package com.develhope.spring.Vehicle.Service;
 
+import com.develhope.spring.User.Entity.Role;
+import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Dto.VehicleDTO;
 import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
@@ -7,6 +9,7 @@ import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Entity.VehicleType;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -18,9 +21,13 @@ public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
 
-    public VehicleDTO createVehicle(VehicleDTO vehicleDTO) {
-        Vehicle vehicle = convertToEntity(vehicleDTO);
-        vehicleRepository.save(vehicle);
+    public VehicleDTO createVehicle(Users users, VehicleDTO vehicleDTO) {
+        if (users.getRole() == Role.ADMIN) {
+            Vehicle vehicle = convertToEntity(vehicleDTO);
+            vehicleRepository.save(vehicle);
+        } else {
+            throw new AccessDeniedException("permesso negato");
+        }
         return vehicleDTO;
     }
 

@@ -26,8 +26,7 @@ public class VehicleController {
     @ApiResponses(value = {@ApiResponse (responseCode = "201",description = "created")})
     @PostMapping("/add")
     public ResponseEntity<VehicleDTO> createVehicle (@AuthenticationPrincipal Users user, @RequestBody VehicleDTO vehicleDTO) {
-        VehicleDTO saveVehicle = vehicleService.createVehicle(vehicleDTO);
-        System.out.println(user);
+        VehicleDTO saveVehicle = vehicleService.createVehicle(user, vehicleDTO);
         return new ResponseEntity<>(saveVehicle, HttpStatus.CREATED);
     }
     @PostMapping("/stampa")
