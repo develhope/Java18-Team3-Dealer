@@ -2,7 +2,10 @@ package com.develhope.spring.Purchase.dto;
 
 import com.develhope.spring.Order.Entity.Orders;
 import com.develhope.spring.Purchase.Entity.PurchaseStatus;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 

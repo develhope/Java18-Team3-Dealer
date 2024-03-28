@@ -7,6 +7,7 @@ import com.develhope.spring.Purchase.dto.PurchaseDTO;
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;

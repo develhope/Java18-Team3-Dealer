@@ -3,6 +3,9 @@ import com.develhope.spring.User.DTO.UsersDTO;
 import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.User.Repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -54,6 +57,7 @@ public class UserService {
         users.setEmail(usersDTO.getEmail());
         users.setPassword(usersDTO.getPassword());
         users.setTelephoneNumber(usersDTO.getTelephoneNumber());
+        users.setRole(usersDTO.getRole());
         return users;
     }
 
@@ -64,6 +68,17 @@ public class UserService {
         usersDTO.setEmail(users.getEmail());
         usersDTO.setPassword(users.getEmail());
         usersDTO.setTelephoneNumber(users.getTelephoneNumber());
+        usersDTO.setRole(users.getRole());
         return usersDTO;
+    }
+
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) {
+                return usersRepository.findByEmail(username)
+                        .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+            }
+        };
     }
 }

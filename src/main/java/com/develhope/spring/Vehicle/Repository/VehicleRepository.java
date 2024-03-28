@@ -1,7 +1,6 @@
 package com.develhope.spring.Vehicle.Repository;
 
 import com.develhope.spring.Vehicle.Entity.Vehicle;
-import com.develhope.spring.Vehicle.Entity.VehicleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
