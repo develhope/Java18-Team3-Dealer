@@ -1,13 +1,19 @@
 package com.develhope.spring.Vehicle.Entity;
 
-import com.develhope.spring.Rental.Entity.Rental;
-import jakarta.persistence.*;
 
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.math.BigDecimal;
-import java.time.Year;
-import java.util.List;
+
 @Entity
 @Table
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Vehicle {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,15 +31,15 @@ public class Vehicle {
     @Column(nullable = false)
     private String transmission;
     @Column(nullable = false)
-    private Year registrationYear;
+    private Integer registrationYear;
     @Column(nullable = false)
     private String fullType;
     @Column(nullable = false)
     private BigDecimal price;
     @Column(nullable = false)
-    private Double discount;
+    private BigDecimal discount;
     @Column(nullable = false)
-    private List<String> accessories;
+    private String accessories;
     @Column(nullable = false)
     private Boolean isNew;
     @Column(nullable = false)
@@ -43,151 +49,10 @@ public class Vehicle {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
-    public Vehicle(Long vehicleId, String brand, String model, int displacement, String color, int power, String transmission, Year registationYear, String fullType, BigDecimal price, Double discount, List<String> accessories, Boolean isNew, VehicleStatus vehicleStatus, VehicleType vehicleType) {
-        this.vehicleId = vehicleId;
-        this.brand = brand;
-        this.model = model;
-        this.displacement = displacement;
-        this.color = color;
-        this.power = power;
-        this.transmission = transmission;
-        this.registrationYear = registationYear;
-        this.fullType = fullType;
-        this.price = price;
-        this.discount = discount;
-        this.accessories = accessories;
-        this.isNew = isNew;
-        this.vehicleStatus = vehicleStatus;
-        this.vehicleType = vehicleType;
-    }
-
-    public Vehicle() {
-    }
-
-    public Long getVehicleIdId() {
-        return vehicleId;
-    }
-
-    public void setVehicleIdId(Long id) {
-        this.vehicleId = id;
-    }
-
-    public String getBrand() {
-        return brand;
-    }
-
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
-
-    public String getModel() {
-        return model;
-    }
-
-    public void setModel(String model) {
-        this.model = model;
-    }
-
-    public int getDisplacement() {
-        return displacement;
-    }
-
-    public void setDisplacement(int displacement) {
-        this.displacement = displacement;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-
-    public int getPower() {
-        return power;
-    }
-
-    public void setPower(int power) {
-        this.power = power;
-    }
-
-    public String getTransmission() {
-        return transmission;
-    }
-
-    public void setTransmission(String transmission) {
-        this.transmission = transmission;
-    }
-
-    public Year getRegistationYear() {
-        return registrationYear;
-    }
-
-    public void setRegistationYear(Year registationYear) {
-        this.registrationYear = registationYear;
-    }
-
-    public String getFullType() {
-        return fullType;
-    }
-
-    public void setFullType(String fullType) {
-        this.fullType = fullType;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
-    }
-
-    public Double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(Double discount) {
-        this.discount = discount;
-    }
-
-    public List<String> getAccessories() {
-        return accessories;
-    }
-
-    public void setAccessories(List<String> accessories) {
-        this.accessories = accessories;
-    }
-
-    public Boolean getNew() {
-        return isNew;
-    }
-
-    public void setNew(Boolean aNew) {
-        isNew = aNew;
-    }
-
-    public VehicleStatus getVehicleStatus() {
-        return vehicleStatus;
-    }
-
-    public void setVehicleStatus(VehicleStatus vehicleStatus) {
-        this.vehicleStatus = vehicleStatus;
-    }
-
-    public VehicleType getVehicleType() {
-        return vehicleType;
-    }
-
-    public void setVehicleType(VehicleType vehicleType) {
-        this.vehicleType = vehicleType;
-    }
-
     @Override
     public String toString() {
-        return "Veicolo{" +
-                "id=" + vehicleId +
+        return "Vehicle{" +
+                "vehicleId=" + vehicleId +
                 ", brand='" + brand + '\'' +
                 ", model='" + model + '\'' +
                 ", displacement=" + displacement +
@@ -198,7 +63,7 @@ public class Vehicle {
                 ", fullType='" + fullType + '\'' +
                 ", price=" + price +
                 ", discount=" + discount +
-                ", accessories=" + accessories +
+                ", accessories='" + accessories + '\'' +
                 ", isNew=" + isNew +
                 ", vehicleStatus=" + vehicleStatus +
                 ", vehicleType=" + vehicleType +
