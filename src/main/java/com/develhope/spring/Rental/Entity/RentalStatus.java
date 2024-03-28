@@ -5,5 +5,4 @@ public enum RentalStatus {
     BOOKED,
     OUT,
     MAINTENANCE
-
 }

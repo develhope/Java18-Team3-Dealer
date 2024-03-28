@@ -1,7 +1,5 @@
 package com.develhope.spring.Vehicle.Service;
 
-import com.develhope.spring.User.Entity.Role;
-import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Dto.VehicleDTO;
 import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
@@ -9,10 +7,10 @@ import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Entity.VehicleType;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,13 +19,9 @@ public class VehicleService {
     @Autowired
     VehicleRepository vehicleRepository;
 
-    public VehicleDTO createVehicle(Users users, VehicleDTO vehicleDTO) {
-        if (users.getRole() == Role.ADMIN) {
-            Vehicle vehicle = convertToEntity(vehicleDTO);
-            vehicleRepository.save(vehicle);
-        } else {
-            throw new AccessDeniedException("permesso negato");
-        }
+    public VehicleDTO createVehicle(VehicleDTO vehicleDTO) {
+        Vehicle vehicle = convertToEntity(vehicleDTO);
+        vehicleRepository.save(vehicle);
         return vehicleDTO;
     }
 
@@ -174,7 +168,8 @@ public class VehicleService {
         vehicle.setColor(vehicleDTO.getColor());
         vehicle.setPower(vehicleDTO.getPower());
         vehicle.setTransmission(vehicleDTO.getTransmission());
-        vehicle.setRegistrationYear(vehicleDTO.getRegistrationYear());
+      //  vehicle.setRegistrationYear(vehicleDTO.getRegistrationYear());
+        vehicle.setRegistrationYear(Year.of(vehicleDTO.getRegistrationYear()));
         vehicle.setFullType(vehicleDTO.getFullType());
         vehicle.setPrice(vehicleDTO.getPrice());
         vehicle.setDiscount(vehicleDTO.getDiscount());
@@ -193,7 +188,8 @@ public class VehicleService {
         vehicleDTO.setColor(vehicle.getColor());
         vehicleDTO.setPower(vehicle.getPower());
         vehicleDTO.setTransmission(vehicle.getTransmission());
-        vehicleDTO.setRegistrationYear(vehicle.getRegistrationYear());
+       // vehicleDTO.setRegistrationYear(vehicle.getRegistrationYear());
+        vehicleDTO.setRegistrationYear(vehicle.getRegistrationYear().getValue());
         vehicleDTO.setFullType(vehicle.getFullType());
         vehicleDTO.setPrice(vehicle.getPrice());
         vehicleDTO.setDiscount(vehicle.getDiscount());

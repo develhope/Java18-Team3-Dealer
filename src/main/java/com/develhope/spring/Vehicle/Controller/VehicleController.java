@@ -1,6 +1,5 @@
 package com.develhope.spring.Vehicle.Controller;
 
-import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Dto.VehicleDTO;
 import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
 import com.develhope.spring.Vehicle.Entity.VehicleType;
@@ -11,7 +10,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -25,14 +23,9 @@ public class VehicleController {
     @Operation(summary = "Create a vehicle")
     @ApiResponses(value = {@ApiResponse (responseCode = "201",description = "created")})
     @PostMapping("/add")
-    public ResponseEntity<VehicleDTO> createVehicle (@AuthenticationPrincipal Users user, @RequestBody VehicleDTO vehicleDTO) {
-        VehicleDTO saveVehicle = vehicleService.createVehicle(user, vehicleDTO);
+    public ResponseEntity<VehicleDTO> createVehicle (@RequestBody VehicleDTO vehicleDTO) {
+        VehicleDTO saveVehicle = vehicleService.createVehicle(vehicleDTO);
         return new ResponseEntity<>(saveVehicle, HttpStatus.CREATED);
-    }
-    @PostMapping("/stampa")
-    public ResponseEntity<VehicleDTO> createVehicle (@AuthenticationPrincipal Users user) {
-        System.out.println(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @Operation(summary = "Get a vehicle by Id")
