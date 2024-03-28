@@ -1,7 +1,5 @@
 package com.develhope.spring.Rental.Entity;
 
-import com.develhope.spring.Buyer.Entity.Buyer;
-import com.develhope.spring.Seller.ENTITY.SellerEntity;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 
@@ -27,13 +25,9 @@ public class Rental {
     @Enumerated(EnumType.STRING)
     private RentalStatus rentalStatus;
     @ManyToOne
-    private Buyer buyer;
-    @ManyToOne
-    private SellerEntity sellerEntity;
-    @ManyToOne
     private Vehicle vehicle;
 
-    public Rental(Long rentalId, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus, Buyer buyer, SellerEntity sellerEntity, Vehicle vehicle) {
+    public Rental(Long rentalId, LocalDate startDate, LocalDate endDate, double dailyCost, double totalCost, boolean paidFlag, RentalStatus rentalStatus, Vehicle vehicle) {
         this.rentalId = rentalId;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -41,8 +35,6 @@ public class Rental {
         this.totalCost = totalCost;
         this.paidFlag = paidFlag;
         this.rentalStatus = rentalStatus;
-        this.buyer = buyer;
-        this.sellerEntity = sellerEntity;
         this.vehicle = vehicle;
     }
 
@@ -105,21 +97,6 @@ public class Rental {
         this.rentalStatus = rentalStatus;
     }
 
-    public Buyer getBuyer() {
-        return buyer;
-    }
-
-    public void setBuyer(Buyer buyer) {
-        this.buyer = buyer;
-    }
-
-    public SellerEntity getSellerEntity() {
-        return sellerEntity;
-    }
-
-    public void setSellerEntity(SellerEntity sellerEntity) {
-        this.sellerEntity = sellerEntity;
-    }
 
     public Vehicle getVehicle() {
         return vehicle;
@@ -139,8 +116,6 @@ public class Rental {
                 ", totalCost=" + totalCost +
                 ", paidFlag=" + paidFlag +
                 ", rentalStatus=" + rentalStatus +
-                ", buyer=" + buyer +
-                ", sellerEntity=" + sellerEntity +
                 ", vehicle=" + vehicle +
                 '}';
     }

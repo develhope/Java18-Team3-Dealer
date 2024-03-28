@@ -1,11 +1,15 @@
 package com.develhope.spring.Rental.RentalService;
 
 import com.develhope.spring.Rental.Entity.Rental;
+import com.develhope.spring.Rental.Entity.RentalStatus;
 import com.develhope.spring.Rental.RentalRepository.RentalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-    @Service
+import java.util.List;
+import java.util.Optional;
+
+@Service
     public class RentalService {
         @Autowired
         private RentalRepository rentalRepository;
@@ -30,6 +34,24 @@ import org.springframework.stereotype.Service;
                 return rentalRepository.save(newRental);
             }
             return null;
+        }
+
+        public Rental modifyRental(Long id, Rental rental){ //modificare noleggio per un utente
+            Rental newUpdateRental = rentalRepository.findById(id).orElse(null);
+            if (newUpdateRental != null){
+                newUpdateRental.setStartDate(rental.getStartDate());
+                newUpdateRental.setEndDate(rental.getEndDate());
+                newUpdateRental.setDailyCost(rental.getDailyCost());
+                newUpdateRental.setTotalCost(rental.getTotalCost());
+                newUpdateRental.setPaidFlag(rental.isPaidFlag());
+                newUpdateRental.setRentalStatus(rental.getRentalStatus());
+                return rentalRepository.save(newUpdateRental);
+            }
+            return null;
+        }
+
+        public List<Rental> getListRental(){
+            return rentalRepository.findAll();
         }
     }
 
