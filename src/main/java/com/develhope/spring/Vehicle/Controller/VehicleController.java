@@ -1,5 +1,6 @@
 package com.develhope.spring.Vehicle.Controller;
 
+import com.develhope.spring.Exception.AccessDeniedException;
 import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Dto.VehicleDTO;
 import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
@@ -15,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -25,10 +27,17 @@ public class VehicleController {
     @Operation(summary = "Create a vehicle")
     @ApiResponses(value = {@ApiResponse (responseCode = "201",description = "created")})
     @PostMapping("/add")
-    public ResponseEntity<VehicleDTO> createVehicle (@AuthenticationPrincipal Users user, @RequestBody VehicleDTO vehicleDTO) {
-        VehicleDTO saveVehicle = vehicleService.createVehicle(user, vehicleDTO);
-        return new ResponseEntity<>(saveVehicle, HttpStatus.CREATED);
+    public ResponseEntity<?> createVehicle (@AuthenticationPrincipal Users user, @RequestBody VehicleDTO vehicleDTO) {
+        try {
+            VehicleDTO savedVehicle = vehicleService.createVehicle(user, vehicleDTO);
+            return new ResponseEntity<>(savedVehicle, HttpStatus.CREATED);
+        } catch (AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
+
     @PostMapping("/stampa")
     public ResponseEntity<VehicleDTO> createVehicle (@AuthenticationPrincipal Users user) {
         System.out.println(user);

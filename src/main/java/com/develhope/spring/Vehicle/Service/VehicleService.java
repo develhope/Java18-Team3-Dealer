@@ -1,5 +1,6 @@
 package com.develhope.spring.Vehicle.Service;
 
+import com.develhope.spring.Exception.AccessDeniedException;
 import com.develhope.spring.User.Entity.Role;
 import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Dto.VehicleDTO;
@@ -9,7 +10,6 @@ import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Entity.VehicleType;
 import com.develhope.spring.Vehicle.Repository.VehicleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -26,7 +26,7 @@ public class VehicleService {
             Vehicle vehicle = convertToEntity(vehicleDTO);
             vehicleRepository.save(vehicle);
         } else {
-            throw new AccessDeniedException("permesso negato");
+            throw new AccessDeniedException("Only admin can");
         }
         return vehicleDTO;
     }
