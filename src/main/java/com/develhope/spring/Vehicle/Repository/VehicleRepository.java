@@ -24,4 +24,10 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     @Query(value = "SELECT * FROM VEHICLE WHERE vehicle_Type = ?1", nativeQuery = true)
     List<Vehicle> getAllVehicleByType (String vehicleType);
+
+    @Query(value = "SELECT * FROM VEHICLE WHERE vehicle_Status = ?1", nativeQuery = true)
+    List<Vehicle> getAllVehicleStatus (String vehicleStatus);
+
+    @Query(value = "SELECT * FROM VEHICLE WHERE is_new = ?1", nativeQuery = true)
+    List<Vehicle> getAllVehicleNew (Boolean isNew);
 }
