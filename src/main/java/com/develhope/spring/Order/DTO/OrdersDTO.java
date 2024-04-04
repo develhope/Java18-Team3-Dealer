@@ -1,7 +1,9 @@
 package com.develhope.spring.Order.DTO;
 
 import com.develhope.spring.Order.Entity.OrderStatus;
+import com.develhope.spring.User.DTO.UsersDTO;
 import com.develhope.spring.User.Entity.Users;
+import com.develhope.spring.Vehicle.Dto.VehicleDTO;
 import com.develhope.spring.Vehicle.Entity.Vehicle;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -22,9 +24,9 @@ public class OrdersDTO {
 
     private OrderStatus orderStatus;
 
-    private Users seller;
+    private UsersDTO seller;
 
-    private Users customer;
+    private UsersDTO customer;
 
-    private Vehicle vehicle;
+    private VehicleDTO vehicle;
 }
