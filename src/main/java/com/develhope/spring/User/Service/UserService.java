@@ -1,5 +1,6 @@
 package com.develhope.spring.User.Service;
 import com.develhope.spring.User.DTO.UsersDTO;
+import com.develhope.spring.User.Entity.Role;
 import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.User.Repository.UsersRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +13,13 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     UsersRepository usersRepository;
-    public UsersDTO createUsers(UsersDTO usersDTO) {
-        Users saveDTO = convertToEntity(usersDTO);
-        usersRepository.save(saveDTO);
+    public UsersDTO createUsers(UsersDTO usersDTO, Users user) {
+        if(user.getRole() == Role.ADMIN) {
+            Users saveDTO = convertToEntity(usersDTO);
+            usersRepository.save(saveDTO);
+        }else {
+            throw new IllegalArgumentException("Access denied");
+        }
         return usersDTO;
     }
 

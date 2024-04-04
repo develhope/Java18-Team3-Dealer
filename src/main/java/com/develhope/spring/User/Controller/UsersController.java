@@ -4,12 +4,12 @@ import com.develhope.spring.User.DTO.UsersDTO;
 import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.User.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -23,9 +23,9 @@ public class UsersController {
             @ApiResponse(responseCode = "200", description = "Created!"),
             @ApiResponse(responseCode = "400", description = "Bad Request!")})
     @PostMapping("/createUser")
-    public ResponseEntity<UsersDTO> createUsers(@RequestBody UsersDTO usersDTO){
-       UsersDTO saveUsers = userService.createUsers(usersDTO);
-       return new ResponseEntity<>(saveUsers, HttpStatus.CREATED);
+    public ResponseEntity<UsersDTO> createUsers(@RequestBody UsersDTO usersDTO, @AuthenticationPrincipal Users user){
+        userService.createUsers(usersDTO, user);
+       return new ResponseEntity<>(usersDTO, HttpStatus.CREATED);
     }
     @Operation(summary = "Delete Users by ID")
     @ApiResponses(value = {
