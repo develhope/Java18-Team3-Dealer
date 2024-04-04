@@ -1,8 +1,10 @@
 package com.develhope.spring.Vehicle.Controller;
 
+import com.develhope.spring.Exception.CustomExceptions;
 import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.Vehicle.Dto.VehicleDTO;
 import com.develhope.spring.Vehicle.Dto.VehicleStatusDTO;
+import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Entity.VehicleType;
 import com.develhope.spring.Vehicle.Service.VehicleService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -15,6 +17,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -22,78 +25,182 @@ import java.util.List;
 public class VehicleController {
     @Autowired
     VehicleService vehicleService;
+
     @Operation(summary = "Create a vehicle")
-    @ApiResponses(value = {@ApiResponse (responseCode = "201",description = "created")})
+    @ApiResponses(value = {@ApiResponse(responseCode = "201", description = "created"),
+            @ApiResponse(responseCode = "403", description = "Forbidden")})
     @PostMapping("/add")
-    public ResponseEntity<VehicleDTO> createVehicle (@AuthenticationPrincipal Users user, @RequestBody VehicleDTO vehicleDTO) {
-        VehicleDTO saveVehicle = vehicleService.createVehicle(vehicleDTO);
-        System.out.println(user);
-        return new ResponseEntity<>(saveVehicle, HttpStatus.CREATED);
-    }
-    @PostMapping("/stampa")
-    public ResponseEntity<VehicleDTO> createVehicle (@AuthenticationPrincipal Users user) {
-        System.out.println(user);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<?> createVehicle(@AuthenticationPrincipal Users user, @RequestBody VehicleDTO vehicleDTO) {
+        try {
+            vehicleService.createVehicle(user, vehicleDTO);
+            return new ResponseEntity<>(vehicleDTO, HttpStatus.CREATED);
+        } catch (CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
 
     @Operation(summary = "Get a vehicle by Id")
     @GetMapping("/{id}")
-    public ResponseEntity<VehicleDTO> getVehicleById (@PathVariable Long id) {
-        return new ResponseEntity<>(vehicleService.getVehicleById(id), HttpStatus.OK);
+    public ResponseEntity<?> getVehicleById(@PathVariable Long id, @AuthenticationPrincipal Users user) {
+        try {
+            VehicleDTO vehicleDTO = vehicleService.getVehicleById(id, user);
+            return new ResponseEntity<>(vehicleDTO, HttpStatus.OK);
+        } catch (CustomExceptions.InvalidIdException | CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
+
 
     @Operation(summary = "Get all vehicle")
     @GetMapping("/all")
-    public ResponseEntity<List<VehicleDTO>> getAllVehicle () {
-        return new ResponseEntity<>(vehicleService.getAllVehicle(), HttpStatus.OK);
+    public ResponseEntity<?> getAllVehicle() {
+        try {
+            List<VehicleDTO> vehicleDTOList = vehicleService.getAllVehicle();
+
+            return new ResponseEntity<>(vehicleDTOList, HttpStatus.OK);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
+
     }
 
     @Operation(summary = "Get vehicles by price")
     @GetMapping("/byPrice")
-    public ResponseEntity<List<VehicleDTO>> getVehicleByPrice (@RequestParam(defaultValue = "0") BigDecimal minPrice, @RequestParam(defaultValue = "1000000000000") BigDecimal maxPrice) {
-        return new ResponseEntity<>(vehicleService.getVehicleByPrice(minPrice, maxPrice), HttpStatus.OK);
+    public ResponseEntity<?> getVehicleByPrice(@AuthenticationPrincipal Users user, @RequestParam(defaultValue = "0") BigDecimal minPrice, @RequestParam(defaultValue = "1000000000000") BigDecimal maxPrice) {
+        try {
+            List<VehicleDTO> vehicleDTOList = vehicleService.getVehicleByPrice(user, minPrice, maxPrice);
+            return new ResponseEntity<>(vehicleDTOList, HttpStatus.OK);
+        } catch (CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
+
     }
 
     @Operation(summary = "Get vehicles by color")
     @GetMapping("/byColor")
-    public ResponseEntity<List<VehicleDTO>> getVehicleByColor (@RequestParam String color) {
-        return new ResponseEntity<>(vehicleService.getVehicleByColor(color), HttpStatus.OK);
+    public ResponseEntity<?> getVehicleByColor(@AuthenticationPrincipal Users user, @RequestParam String color) {
+        try {
+            List<VehicleDTO> vehicleDTOList = vehicleService.getVehicleByColor(user, color);
+            return new ResponseEntity<>(vehicleDTOList, HttpStatus.OK);
+        } catch (IllegalArgumentException | CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
+
     }
 
     @Operation(summary = "Get vehicles by brand")
     @GetMapping("/byBrand")
-    public ResponseEntity<List<VehicleDTO>> getVehicleByBrand (@RequestParam String brand) {
-        return new ResponseEntity<>(vehicleService.getVehicleByBrand(brand), HttpStatus.OK);
+    public ResponseEntity<?> getVehicleByBrand(@AuthenticationPrincipal Users user, @RequestParam String brand) {
+        try {
+            List<VehicleDTO> vehicleDTOList = vehicleService.getVehicleByBrand(user, brand);
+            return new ResponseEntity<>(vehicleDTOList, HttpStatus.OK);
+        } catch (IllegalArgumentException | CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
 
     @Operation(summary = "Get vehicles by model")
     @GetMapping("/byModel")
-    public ResponseEntity<List<VehicleDTO>> getVehicleByModel (@RequestParam String model) {
-        return new ResponseEntity<>(vehicleService.getVehicleByModel(model), HttpStatus.OK);
+    public ResponseEntity<?> getVehicleByModel(@AuthenticationPrincipal Users user, @RequestParam String model) {
+        try {
+            List<VehicleDTO> vehicleDTOList = vehicleService.getVehicleByModel(user, model);
+            return new ResponseEntity<>(vehicleDTOList, HttpStatus.OK);
+        } catch (IllegalArgumentException | CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
 
     @Operation(summary = "Get vehicles by type")
     @GetMapping("/byType")
-    public ResponseEntity<List<VehicleDTO>> getVehicleByType (@RequestParam VehicleType vehicleType) {
-        return new ResponseEntity<>(vehicleService.getVehicleByType(vehicleType), HttpStatus.OK);
+    public ResponseEntity<?> getVehicleByType(@AuthenticationPrincipal Users user, @RequestParam VehicleType vehicleType) {
+        try {
+            List<VehicleDTO> vehicleDTOList = vehicleService.getVehicleByType(user, vehicleType);
+            return new ResponseEntity<>(vehicleDTOList, HttpStatus.OK);
+        } catch (CustomExceptions.InvalidTypeException | CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
+    }
+
+    @Operation(summary = "Get vehicles by status")
+    @GetMapping("/byStatus")
+    public ResponseEntity<?> getVehicleByStatus(@AuthenticationPrincipal Users user, @RequestParam VehicleStatus vehicleStatus) {
+        try {
+            List<VehicleDTO> vehicleDTOList = vehicleService.getVehicleByStatus(user, vehicleStatus);
+            return new ResponseEntity<>(vehicleDTOList, HttpStatus.OK);
+        } catch (CustomExceptions.InvalidStatusException | CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
+    }
+
+    @Operation(summary = "Get vehicles new")
+    @GetMapping("/isNew")
+    public ResponseEntity<?> getVehicleNew(@AuthenticationPrincipal Users user, @RequestParam Boolean isNew) {
+        try {
+            List<VehicleDTO> vehicleDTOList = vehicleService.getVehicleNew(user, isNew);
+            return new ResponseEntity<>(vehicleDTOList, HttpStatus.OK);
+        } catch (CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
 
     @Operation(summary = "update a vehicle")
     @PutMapping("/update/{id}")
-    public VehicleDTO updateVehicle (@PathVariable Long id, @RequestBody VehicleDTO updateVehicleDTO) {
-        return vehicleService.updateVehicle(id, updateVehicleDTO);
+    public ResponseEntity<?> updateVehicle(@PathVariable Long id, @AuthenticationPrincipal Users user, @RequestBody VehicleDTO updateVehicleDTO) {
+        try {
+            vehicleService.updateVehicle(id, user, updateVehicleDTO);
+            return new ResponseEntity<>(updateVehicleDTO, HttpStatus.OK);
+        } catch (CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
 
     @Operation(summary = "Change a vehicle status")
     @PutMapping("/status/{id}")
-    public VehicleDTO changeStatus (@PathVariable Long id, @RequestBody VehicleStatusDTO vehicleStatusDTO) {
-        return vehicleService.chanceStatus(id, vehicleStatusDTO);
+    public ResponseEntity<?> changeStatus(@PathVariable Long id, @AuthenticationPrincipal Users user, @RequestBody VehicleStatusDTO vehicleStatusDTO) {
+        try {
+            VehicleDTO vehicleDTO = vehicleService.chanceStatus(id, user, vehicleStatusDTO);
+            return new ResponseEntity<>(vehicleDTO, HttpStatus.OK);
+        } catch (CustomExceptions.InvalidIdException | CustomExceptions.InvalidStatusException |
+                 CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
+
     }
 
     @Operation(summary = "Delete a vehicle by Id")
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Void> deleteVehicle (@PathVariable Long id) {
-        vehicleService.deleteVehicle(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<?> deleteVehicle(@PathVariable Long id, @AuthenticationPrincipal Users user) {
+        try {
+            vehicleService.deleteVehicle(id, user);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (CustomExceptions.InvalidIdException | CustomExceptions.AccessDeniedException e) {
+            return ResponseEntity
+                    .status(HttpStatus.FORBIDDEN)
+                    .body(Collections.singletonMap("error", e.getMessage()));
+        }
     }
 }

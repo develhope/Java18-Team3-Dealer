@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
@@ -43,5 +42,20 @@ public class Rental {
     @JoinColumn(name = "vehicle_id", nullable = false)
     private Vehicle vehicle;
 
+    @Override
+    public String toString() {
+        return "Rental{" +
+                "rentalId=" + rentalId +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", dailyCost=" + dailyCost +
+                ", totalCost=" + totalCost +
+                ", paidFlag=" + paidFlag +
+                ", rentalStatus=" + rentalStatus +
+                ", seller=" + seller +
+                ", customer=" + customer +
+                ", vehicle=" + vehicle +
+                '}';
+    }
 }
 

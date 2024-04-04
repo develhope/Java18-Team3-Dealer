@@ -1,7 +1,6 @@
 package com.develhope.spring.User.Controller;
 
 import com.develhope.spring.User.DTO.UsersDTO;
-import com.develhope.spring.User.Entity.Users;
 import com.develhope.spring.User.Service.UserService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;

@@ -1,7 +1,6 @@
 package com.develhope.spring.Vehicle.Repository;
 
 import com.develhope.spring.Vehicle.Entity.Vehicle;
-import com.develhope.spring.Vehicle.Entity.VehicleType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -25,4 +24,10 @@ public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
 
     @Query(value = "SELECT * FROM VEHICLE WHERE vehicle_Type = ?1", nativeQuery = true)
     List<Vehicle> getAllVehicleByType (String vehicleType);
+
+    @Query(value = "SELECT * FROM VEHICLE WHERE vehicle_Status = ?1", nativeQuery = true)
+    List<Vehicle> getAllVehicleStatus (String vehicleStatus);
+
+    @Query(value = "SELECT * FROM VEHICLE WHERE is_new = ?1", nativeQuery = true)
+    List<Vehicle> getAllVehicleNew (Boolean isNew);
 }

@@ -2,7 +2,10 @@ package com.develhope.spring.Vehicle.Dto;
 
 import com.develhope.spring.Vehicle.Entity.VehicleStatus;
 import com.develhope.spring.Vehicle.Entity.VehicleType;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
