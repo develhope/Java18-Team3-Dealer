@@ -13,25 +13,24 @@ import org.springframework.stereotype.Service;
 public class UserService {
     @Autowired
     UsersRepository usersRepository;
-    public UsersDTO createUsers(UsersDTO usersDTO, Users user) {
-        if(user.getRole() == Role.ADMIN) {
-            Users saveDTO = convertToEntity(usersDTO);
-            usersRepository.save(saveDTO);
-        }else {
-            throw new IllegalArgumentException("Access denied");
-        }
+    public UsersDTO createUsers(UsersDTO usersDTO) {
+        Users saveDTO = convertToEntity(usersDTO);
+        usersRepository.save(saveDTO);
         return usersDTO;
     }
 
-    public void deleteUsersByID(Long userId) {
-        Users users = usersRepository.findById(userId).orElse(null);
-        if (users == null) {
-            throw new IllegalArgumentException("Buyer not found by ID : " + userId);
-        } else {
-            usersRepository.deleteById(userId);
+    public void deleteUsersByID(Long userId, Users user) {
+        if (user.getRole() == Role.ADMIN) {
+            Users users = usersRepository.findById(userId).orElse(null);
+            if (users == null) {
+                throw new IllegalArgumentException("Buyer not found by ID : " + userId);
+            } else {
+                usersRepository.deleteById(userId);
+            }
+        }else{
+            throw new IllegalArgumentException("Access denied");
         }
     }
-
     public UsersDTO findById(Long userId) {
         Users users = usersRepository.findById(userId).orElse(null);
         if (users == null) {

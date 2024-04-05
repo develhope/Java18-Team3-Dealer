@@ -23,17 +23,18 @@ public class UsersController {
             @ApiResponse(responseCode = "200", description = "Created!"),
             @ApiResponse(responseCode = "400", description = "Bad Request!")})
     @PostMapping("/createUser")
-    public ResponseEntity<UsersDTO> createUsers(@RequestBody UsersDTO usersDTO, @AuthenticationPrincipal Users user){
-        userService.createUsers(usersDTO, user);
-       return new ResponseEntity<>(usersDTO, HttpStatus.CREATED);
+    public UsersDTO createUser(@RequestBody UsersDTO usersDTO){
+
+        return userService.createUsers(usersDTO);
+
     }
     @Operation(summary = "Delete Users by ID")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Delete!"),
             @ApiResponse(responseCode = "400", description = "Bad Request!")})
     @DeleteMapping("/deleteUser/{userId}")
-    public ResponseEntity<Void> deleteUsers(@PathVariable Long userId){
-        userService.deleteUsersByID(userId);
+    public ResponseEntity<Void> deleteUsers(@PathVariable Long userId, @AuthenticationPrincipal Users user){
+        userService.deleteUsersByID(userId, user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
     @Operation(summary = "Update Users by ID")
